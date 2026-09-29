@@ -1,0 +1,43 @@
+name: Publish verified source edition
+on:
+  push:
+    branches: [main]
+    paths: [source-release.zip]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    if: github.repository == 'PragmaLearningInstitute/rumba-ex' && github.actor == 'PragmaLearningInstitute'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Verify and publish the reviewed archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f source-release.zip ]; then exit 0; fi
+          echo '27144e619c2a3d1458ebb7fce708b17cb74e848d95a81c2fd689817f5c2d1f0d  source-release.zip' | sha256sum --check
+          python3 - <<'PYTHON'
+          import hashlib, json, pathlib, zipfile
+          with zipfile.ZipFile('source-release.zip') as archive:
+              for member in archive.infolist():
+                  path = pathlib.PurePosixPath(member.filename)
+                  if path.is_absolute() or '..' in path.parts or '.git' in path.parts or '.github' in path.parts:
+                      raise ValueError('Unexpected archive path')
+              manifest = json.loads(archive.read('SOURCE_MANIFEST.json'))
+              expected = {entry['path'] for entry in manifest['files']} | {'SOURCE_MANIFEST.json'}
+              if set(archive.namelist()) != expected:
+                  raise ValueError('Manifest mismatch')
+              for entry in manifest['files']:
+                  if hashlib.sha256(archive.read(entry['path'])).hexdigest() != entry['sha256']:
+                      raise ValueError('Source checksum mismatch')
+              archive.extractall('.')
+          PYTHON
+          rm source-release.zip
+          git config user.name 'Pragma Learning Institute'
+          git config user.email 'PragmaLearningInstitute@users.noreply.github.com'
+          git add --all
+          git commit -m 'Publish reviewed source code and complete usage guides'
+          git push origin HEAD:main
