@@ -1,0 +1,1041 @@
+{
+  "version": 1,
+  "directus": "11.0.0",
+  "vendor": "postgres",
+  "collections": [
+    {
+      "collection": "rumba_ex_profiles",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "icon": "person",
+        "note": "RUMBA.EX student profiles owned by public PLI accounts through public_user_id. The website BFF enforces ownership with the pli_session cookie.",
+        "display_template": "{{ student_name }}",
+        "hidden": false,
+        "singleton": false,
+        "archive_field": null,
+        "accountability": "all"
+      },
+      "schema": {
+        "name": "rumba_ex_profiles"
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "icon": "history",
+        "note": "Recommendation history for RUMBA.EX profiles.",
+        "display_template": "{{ exercise_uuid }}",
+        "hidden": false,
+        "singleton": false,
+        "archive_field": null,
+        "accountability": "all"
+      },
+      "schema": {
+        "name": "rumba_ex_recommendation_history"
+      }
+    },
+    {
+      "collection": "rumba_ex_events",
+      "meta": {
+        "collection": "rumba_ex_events",
+        "icon": "analytics",
+        "note": "Anonymous RUMBA.EX web interaction events. No personal data and no text content.",
+        "display_template": "{{ event_type }}",
+        "hidden": false,
+        "singleton": false,
+        "archive_field": null,
+        "accountability": "all"
+      },
+      "schema": {
+        "name": "rumba_ex_events"
+      }
+    },
+    {
+      "collection": "rumba_ex_exercises_meta",
+      "meta": {
+        "collection": "rumba_ex_exercises_meta",
+        "icon": "hub",
+        "note": "ML metadata for RUMBA.EX exercises. Exercise content remains in PostgreSQL table exercise.",
+        "display_template": "{{ exercise_uuid }} {{ cluster_label }}",
+        "hidden": false,
+        "singleton": false,
+        "archive_field": null,
+        "accountability": "all"
+      },
+      "schema": {
+        "name": "rumba_ex_exercises_meta"
+      }
+    }
+  ],
+  "fields": [
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "id",
+      "type": "uuid",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "field": "id",
+        "hidden": true,
+        "interface": "input",
+        "readonly": true,
+        "required": false,
+        "sort": 1,
+        "special": [
+          "uuid"
+        ],
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "rumba_ex_profiles",
+        "data_type": "uuid",
+        "is_primary_key": true,
+        "is_unique": true,
+        "is_nullable": false,
+        "has_auto_increment": false
+      }
+    },
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "user_created",
+      "type": "uuid",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "field": "user_created",
+        "hidden": true,
+        "interface": "select-dropdown-m2o",
+        "readonly": true,
+        "required": true,
+        "sort": 2,
+        "special": [
+          "m2o",
+          "user-created"
+        ],
+        "width": "half"
+      },
+      "schema": {
+        "name": "user_created",
+        "table": "rumba_ex_profiles",
+        "data_type": "uuid",
+        "is_primary_key": false,
+        "is_unique": false,
+        "is_nullable": true,
+        "is_indexed": true
+      }
+    },
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "public_user_id",
+      "type": "uuid",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "field": "public_user_id",
+        "interface": "select-dropdown-m2o",
+        "display": "related-values",
+        "display_options": {
+          "template": "{{ email }}"
+        },
+        "readonly": true,
+        "required": false,
+        "sort": 3,
+        "special": [
+          "m2o"
+        ],
+        "width": "full",
+        "note": "Public PLI account owner used by the RUMBA.EX web app session cookie."
+      },
+      "schema": {
+        "name": "public_user_id",
+        "table": "rumba_ex_profiles",
+        "data_type": "uuid",
+        "is_primary_key": false,
+        "is_unique": false,
+        "is_nullable": true,
+        "is_indexed": true
+      }
+    },
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "field": "date_created",
+        "hidden": true,
+        "interface": "datetime",
+        "readonly": true,
+        "sort": 3,
+        "special": [
+          "date-created"
+        ],
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_created",
+        "table": "rumba_ex_profiles",
+        "data_type": "timestamp with time zone",
+        "is_primary_key": false,
+        "is_unique": false,
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "date_updated",
+      "type": "timestamp",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "field": "date_updated",
+        "hidden": true,
+        "interface": "datetime",
+        "readonly": true,
+        "sort": 4,
+        "special": [
+          "date-updated"
+        ],
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_updated",
+        "table": "rumba_ex_profiles",
+        "data_type": "timestamp with time zone",
+        "is_primary_key": false,
+        "is_unique": false,
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "student_name",
+      "type": "string",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "field": "student_name",
+        "interface": "input",
+        "required": true,
+        "sort": 5,
+        "width": "half"
+      },
+      "schema": {
+        "name": "student_name",
+        "table": "rumba_ex_profiles",
+        "data_type": "character varying",
+        "max_length": 100,
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "age",
+      "type": "integer",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "field": "age",
+        "interface": "input",
+        "options": {
+          "min": 6,
+          "max": 14
+        },
+        "required": true,
+        "sort": 6,
+        "width": "half"
+      },
+      "schema": {
+        "name": "age",
+        "table": "rumba_ex_profiles",
+        "data_type": "integer",
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "blockers",
+      "type": "json",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "field": "blockers",
+        "interface": "input-code",
+        "note": "Array of DyslexiaType strings.",
+        "options": {
+          "language": "json"
+        },
+        "required": true,
+        "sort": 7,
+        "width": "full"
+      },
+      "schema": {
+        "name": "blockers",
+        "table": "rumba_ex_profiles",
+        "data_type": "json",
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "exercise_target",
+      "type": "integer",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "field": "exercise_target",
+        "interface": "input",
+        "options": {
+          "min": 1,
+          "max": 5
+        },
+        "required": true,
+        "sort": 8,
+        "width": "half"
+      },
+      "schema": {
+        "name": "exercise_target",
+        "table": "rumba_ex_profiles",
+        "data_type": "integer",
+        "default_value": 3,
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "temperature",
+      "type": "float",
+      "meta": {
+        "collection": "rumba_ex_profiles",
+        "field": "temperature",
+        "interface": "input",
+        "options": {
+          "min": 0.1,
+          "max": 3
+        },
+        "required": true,
+        "sort": 9,
+        "width": "half"
+      },
+      "schema": {
+        "name": "temperature",
+        "table": "rumba_ex_profiles",
+        "data_type": "real",
+        "default_value": 0.8,
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "id",
+      "type": "uuid",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "id",
+        "hidden": true,
+        "interface": "input",
+        "readonly": true,
+        "required": true,
+        "sort": 1,
+        "special": [
+          "uuid"
+        ],
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "uuid",
+        "is_primary_key": true,
+        "is_unique": true,
+        "is_nullable": false,
+        "has_auto_increment": false
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "profile_id",
+      "type": "uuid",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "profile_id",
+        "interface": "select-dropdown-m2o",
+        "required": true,
+        "sort": 2,
+        "special": [
+          "m2o"
+        ],
+        "width": "half"
+      },
+      "schema": {
+        "name": "profile_id",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "uuid",
+        "is_indexed": true,
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "exercise_uuid",
+      "type": "uuid",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "exercise_uuid",
+        "interface": "input",
+        "note": "References exercise.exercise_id in PostgreSQL.",
+        "required": true,
+        "sort": 3,
+        "width": "half"
+      },
+      "schema": {
+        "name": "exercise_uuid",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "uuid",
+        "is_indexed": true,
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "final_score",
+      "type": "float",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "final_score",
+        "interface": "input",
+        "required": true,
+        "sort": 4,
+        "width": "half"
+      },
+      "schema": {
+        "name": "final_score",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "real",
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "relevance_score",
+      "type": "float",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "relevance_score",
+        "interface": "input",
+        "sort": 5,
+        "width": "half"
+      },
+      "schema": {
+        "name": "relevance_score",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "real",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "authority_score",
+      "type": "float",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "authority_score",
+        "interface": "input",
+        "sort": 6,
+        "width": "half"
+      },
+      "schema": {
+        "name": "authority_score",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "real",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "diversity_score",
+      "type": "float",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "diversity_score",
+        "interface": "input",
+        "sort": 7,
+        "width": "half"
+      },
+      "schema": {
+        "name": "diversity_score",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "real",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "recommended_at",
+      "type": "timestamp",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "recommended_at",
+        "interface": "datetime",
+        "readonly": true,
+        "sort": 8,
+        "special": [
+          "date-created"
+        ],
+        "width": "half"
+      },
+      "schema": {
+        "name": "recommended_at",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "timestamp with time zone",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "student_score",
+      "type": "float",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "student_score",
+        "interface": "input",
+        "note": "Score saisi apres resolution, sur 20.",
+        "sort": 9,
+        "width": "half"
+      },
+      "schema": {
+        "name": "student_score",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "real",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "student_ease",
+      "type": "integer",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "student_ease",
+        "interface": "input",
+        "options": {
+          "min": 1,
+          "max": 5
+        },
+        "note": "Facilite ressentie de 1 tres dur/fatigant a 5 tres facile.",
+        "sort": 10,
+        "width": "half"
+      },
+      "schema": {
+        "name": "student_ease",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "integer",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "feedback_updated_at",
+      "type": "timestamp",
+      "meta": {
+        "collection": "rumba_ex_recommendation_history",
+        "field": "feedback_updated_at",
+        "interface": "datetime",
+        "readonly": true,
+        "sort": 11,
+        "width": "half"
+      },
+      "schema": {
+        "name": "feedback_updated_at",
+        "table": "rumba_ex_recommendation_history",
+        "data_type": "timestamp with time zone",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_events",
+      "field": "id",
+      "type": "uuid",
+      "meta": {
+        "collection": "rumba_ex_events",
+        "field": "id",
+        "hidden": true,
+        "interface": "input",
+        "readonly": true,
+        "required": true,
+        "sort": 1,
+        "special": [
+          "uuid"
+        ],
+        "width": "full"
+      },
+      "schema": {
+        "name": "id",
+        "table": "rumba_ex_events",
+        "data_type": "uuid",
+        "is_primary_key": true,
+        "is_unique": true,
+        "is_nullable": false,
+        "has_auto_increment": false
+      }
+    },
+    {
+      "collection": "rumba_ex_events",
+      "field": "date_created",
+      "type": "timestamp",
+      "meta": {
+        "collection": "rumba_ex_events",
+        "field": "date_created",
+        "hidden": true,
+        "interface": "datetime",
+        "readonly": true,
+        "sort": 2,
+        "special": [
+          "date-created"
+        ],
+        "width": "half"
+      },
+      "schema": {
+        "name": "date_created",
+        "table": "rumba_ex_events",
+        "data_type": "timestamp with time zone",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_events",
+      "field": "event_type",
+      "type": "string",
+      "meta": {
+        "collection": "rumba_ex_events",
+        "field": "event_type",
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            { "text": "session_start", "value": "session_start" },
+            { "text": "profile_created", "value": "profile_created" },
+            { "text": "recommendation_generated", "value": "recommendation_generated" },
+            { "text": "exercise_viewed", "value": "exercise_viewed" },
+            { "text": "export", "value": "export" },
+            { "text": "guest_recommendation", "value": "guest_recommendation" }
+          ]
+        },
+        "required": true,
+        "sort": 3,
+        "width": "half"
+      },
+      "schema": {
+        "name": "event_type",
+        "table": "rumba_ex_events",
+        "data_type": "character varying",
+        "max_length": 80,
+        "is_indexed": true,
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_events",
+      "field": "session_id",
+      "type": "string",
+      "meta": {
+        "collection": "rumba_ex_events",
+        "field": "session_id",
+        "interface": "input",
+        "note": "Ephemeral UUID v4 generated in memory by the client, not persisted client-side.",
+        "required": true,
+        "sort": 4,
+        "width": "half"
+      },
+      "schema": {
+        "name": "session_id",
+        "table": "rumba_ex_events",
+        "data_type": "character varying",
+        "max_length": 80,
+        "is_indexed": true,
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_events",
+      "field": "age_range",
+      "type": "string",
+      "meta": {
+        "collection": "rumba_ex_events",
+        "field": "age_range",
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            { "text": "6-8", "value": "6-8" },
+            { "text": "9-11", "value": "9-11" },
+            { "text": "12-14", "value": "12-14" }
+          ]
+        },
+        "sort": 5,
+        "width": "half"
+      },
+      "schema": {
+        "name": "age_range",
+        "table": "rumba_ex_events",
+        "data_type": "character varying",
+        "max_length": 16,
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_events",
+      "field": "blockers_count",
+      "type": "integer",
+      "meta": {
+        "collection": "rumba_ex_events",
+        "field": "blockers_count",
+        "interface": "input",
+        "sort": 6,
+        "width": "half"
+      },
+      "schema": {
+        "name": "blockers_count",
+        "table": "rumba_ex_events",
+        "data_type": "integer",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_events",
+      "field": "exercise_count",
+      "type": "integer",
+      "meta": {
+        "collection": "rumba_ex_events",
+        "field": "exercise_count",
+        "interface": "input",
+        "sort": 7,
+        "width": "half"
+      },
+      "schema": {
+        "name": "exercise_count",
+        "table": "rumba_ex_events",
+        "data_type": "integer",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_events",
+      "field": "export_format",
+      "type": "string",
+      "meta": {
+        "collection": "rumba_ex_events",
+        "field": "export_format",
+        "interface": "select-dropdown",
+        "options": {
+          "choices": [
+            { "text": "html", "value": "html" },
+            { "text": "pdf", "value": "pdf" },
+            { "text": "docx", "value": "docx" }
+          ]
+        },
+        "sort": 8,
+        "width": "half"
+      },
+      "schema": {
+        "name": "export_format",
+        "table": "rumba_ex_events",
+        "data_type": "character varying",
+        "max_length": 16,
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_events",
+      "field": "is_guest",
+      "type": "boolean",
+      "meta": {
+        "collection": "rumba_ex_events",
+        "field": "is_guest",
+        "interface": "boolean",
+        "required": true,
+        "sort": 9,
+        "width": "half"
+      },
+      "schema": {
+        "name": "is_guest",
+        "table": "rumba_ex_events",
+        "data_type": "boolean",
+        "default_value": true,
+        "is_nullable": false
+      }
+    },
+    {
+      "collection": "rumba_ex_exercises_meta",
+      "field": "exercise_uuid",
+      "type": "uuid",
+      "meta": {
+        "collection": "rumba_ex_exercises_meta",
+        "field": "exercise_uuid",
+        "interface": "input",
+        "note": "Primary key. References exercise.exercise_id in PostgreSQL.",
+        "required": true,
+        "sort": 1,
+        "width": "half"
+      },
+      "schema": {
+        "name": "exercise_uuid",
+        "table": "rumba_ex_exercises_meta",
+        "data_type": "uuid",
+        "is_primary_key": true,
+        "is_unique": true,
+        "is_nullable": false,
+        "has_auto_increment": false
+      }
+    },
+    {
+      "collection": "rumba_ex_exercises_meta",
+      "field": "cluster_id",
+      "type": "integer",
+      "meta": {
+        "collection": "rumba_ex_exercises_meta",
+        "field": "cluster_id",
+        "interface": "input",
+        "sort": 2,
+        "width": "half"
+      },
+      "schema": {
+        "name": "cluster_id",
+        "table": "rumba_ex_exercises_meta",
+        "data_type": "integer",
+        "is_indexed": true,
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_exercises_meta",
+      "field": "cluster_label",
+      "type": "string",
+      "meta": {
+        "collection": "rumba_ex_exercises_meta",
+        "field": "cluster_label",
+        "interface": "input",
+        "sort": 3,
+        "width": "half"
+      },
+      "schema": {
+        "name": "cluster_label",
+        "table": "rumba_ex_exercises_meta",
+        "data_type": "character varying",
+        "max_length": 160,
+        "is_indexed": true,
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_exercises_meta",
+      "field": "umap_x",
+      "type": "float",
+      "meta": {
+        "collection": "rumba_ex_exercises_meta",
+        "field": "umap_x",
+        "interface": "input",
+        "sort": 4,
+        "width": "half"
+      },
+      "schema": {
+        "name": "umap_x",
+        "table": "rumba_ex_exercises_meta",
+        "data_type": "real",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_exercises_meta",
+      "field": "umap_y",
+      "type": "float",
+      "meta": {
+        "collection": "rumba_ex_exercises_meta",
+        "field": "umap_y",
+        "interface": "input",
+        "sort": 5,
+        "width": "half"
+      },
+      "schema": {
+        "name": "umap_y",
+        "table": "rumba_ex_exercises_meta",
+        "data_type": "real",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_exercises_meta",
+      "field": "nearest_neighbors",
+      "type": "json",
+      "meta": {
+        "collection": "rumba_ex_exercises_meta",
+        "field": "nearest_neighbors",
+        "interface": "input-code",
+        "note": "Array of { uuid, score } objects.",
+        "options": {
+          "language": "json"
+        },
+        "sort": 6,
+        "width": "full"
+      },
+      "schema": {
+        "name": "nearest_neighbors",
+        "table": "rumba_ex_exercises_meta",
+        "data_type": "json",
+        "is_nullable": true
+      }
+    },
+    {
+      "collection": "rumba_ex_exercises_meta",
+      "field": "last_ml_run",
+      "type": "timestamp",
+      "meta": {
+        "collection": "rumba_ex_exercises_meta",
+        "field": "last_ml_run",
+        "interface": "datetime",
+        "required": true,
+        "sort": 7,
+        "width": "half"
+      },
+      "schema": {
+        "name": "last_ml_run",
+        "table": "rumba_ex_exercises_meta",
+        "data_type": "timestamp with time zone",
+        "is_nullable": false
+      }
+    }
+  ],
+  "relations": [
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "user_created",
+      "related_collection": "directus_users",
+      "meta": {
+        "many_collection": "rumba_ex_profiles",
+        "many_field": "user_created",
+        "one_collection": "directus_users",
+        "one_field": null,
+        "one_deselect_action": "nullify"
+      },
+      "schema": {
+        "table": "rumba_ex_profiles",
+        "column": "user_created",
+        "foreign_key_table": "directus_users",
+        "foreign_key_column": "id",
+        "on_delete": "SET NULL"
+      }
+    },
+    {
+      "collection": "rumba_ex_profiles",
+      "field": "public_user_id",
+      "related_collection": "users_public",
+      "meta": {
+        "many_collection": "rumba_ex_profiles",
+        "many_field": "public_user_id",
+        "one_collection": "users_public",
+        "one_field": null,
+        "one_deselect_action": "delete"
+      },
+      "schema": {
+        "table": "rumba_ex_profiles",
+        "column": "public_user_id",
+        "foreign_key_table": "users_public",
+        "foreign_key_column": "id",
+        "on_delete": "CASCADE"
+      }
+    },
+    {
+      "collection": "rumba_ex_recommendation_history",
+      "field": "profile_id",
+      "related_collection": "rumba_ex_profiles",
+      "meta": {
+        "many_collection": "rumba_ex_recommendation_history",
+        "many_field": "profile_id",
+        "one_collection": "rumba_ex_profiles",
+        "one_field": "recommendation_history",
+        "one_deselect_action": "delete"
+      },
+      "schema": {
+        "table": "rumba_ex_recommendation_history",
+        "column": "profile_id",
+        "foreign_key_table": "rumba_ex_profiles",
+        "foreign_key_column": "id",
+        "on_delete": "CASCADE"
+      }
+    }
+  ],
+  "x_rumba_ex_permissions": {
+    "notes": [
+      "The Directus schema snapshot above is applied through /schema/diff then /schema/apply.",
+      "Permissions are intentionally applied separately by rumba-ex-directus-setup.sh because Directus schema snapshots do not carry access rules.",
+      "The web app does not expose Directus auth to the browser for profiles. The Node BFF reads the pli_session cookie and filters rumba_ex_profiles by public_user_id.",
+      "The Public policy receives create-only access to rumba_ex_events and read-only access to rumba_ex_exercises_meta.",
+      "Admin users keep access through Directus admin_access and do not need explicit rumba_ex_events read permissions."
+    ],
+    "policies": {
+      "authenticated": "RUMBA.EX Authenticated User Policy",
+      "service": "RUMBA.EX ML Pipeline Service Policy",
+      "public": "Directus public policy discovered via directus_access where role and user are null"
+    },
+    "permission_rules": [
+      {
+        "audience": "website_bff",
+        "collection": "rumba_ex_profiles",
+        "actions": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "owner_filter": {
+          "public_user_id": {
+            "_eq": "$PLI_SESSION_USER"
+          }
+        }
+      },
+      {
+        "audience": "authenticated",
+        "collection": "rumba_ex_recommendation_history",
+        "actions": [
+          "create",
+          "read",
+          "delete"
+        ],
+        "owner_filter": {
+          "profile_id": {
+            "user_created": {
+              "_eq": "$CURRENT_USER"
+            }
+          }
+        }
+      },
+      {
+        "audience": "public",
+        "collection": "rumba_ex_events",
+        "actions": [
+          "create"
+        ],
+        "write_only": true
+      },
+      {
+        "audience": "public",
+        "collection": "rumba_ex_exercises_meta",
+        "actions": [
+          "read"
+        ],
+        "read_only": true
+      },
+      {
+        "audience": "authenticated",
+        "collection": "rumba_ex_exercises_meta",
+        "actions": [
+          "read"
+        ],
+        "read_only": true
+      },
+      {
+        "audience": "service",
+        "collection": "rumba_ex_exercises_meta",
+        "actions": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "service_only": true
+      }
+    ]
+  }
+}

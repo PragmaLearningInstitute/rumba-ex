@@ -1,0 +1,449 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		48EF1AAF0F03033DDF809B48 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = D747245706CAB15ACA62C437 /* ZIPFoundation */; };
+		6484156912E1C1D4B548DED6 /* PostgresService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727B05012F2451D86E993961 /* PostgresService.swift */; };
+		683A42BE415061C62E92E9D5 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FE1134A685809ED87D78D2 /* AppTheme.swift */; };
+		778142F4B87D7F7EBA2A44E3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E3C53CCA98808CA2C38542 /* RootView.swift */; };
+		7783F9F6B428EE8826346C82 /* PostgresNIO in Frameworks */ = {isa = PBXBuildFile; productRef = 6225C6C46E37CC9A351721A3 /* PostgresNIO */; };
+		786C2ACAF70470E5F535619A /* RumbaMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA79592A8CFD92886DC20716 /* RumbaMacApp.swift */; };
+		9235B3754FBCF528514E6612 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2C27D1E33CE7E2F42C7D30 /* DashboardView.swift */; };
+		965418108AFF0DCA323158AA /* StatusBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B2C8E82F68400923594A1F /* StatusBannerView.swift */; };
+		A3B88864013D91C91487B361 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9302F8F748A066D2D4B7CD71 /* Configuration.swift */; };
+		B848116D7C2F2EAB91DFB386 /* DocxExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5A6CF53AADE62C12CAD5B5 /* DocxExporter.swift */; };
+		BB7BC17324967FA7CB5CFF26 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97117A1F0349751C26E5034 /* LoginView.swift */; };
+		BE500DB22DFFA10E22C8D373 /* RecommendationMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7147036B37ED1F9A92590F /* RecommendationMath.swift */; };
+		C558D42EB6D510B4E2934ECA /* ExerciseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A6E6947C3293D7DFA53CAC /* ExerciseRepository.swift */; };
+		CC44BF512C9CC9DEF1E67732 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27B7E73B8E6F7330FCEDA3 /* Models.swift */; };
+		E51E71FA4FAC57DAC3896020 /* RumbaRecommendationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2221C55C36677C347F41C084 /* RumbaRecommendationService.swift */; };
+		EA552D544B164B1E1B0172A0 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1D03C87009E69241260FEE0 /* AppViewModel.swift */; };
+		F3650F4BE0E54BB7B9E2D20E /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938839DBE0DEBD67DFA4AEF8 /* ProfileRepository.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2221C55C36677C347F41C084 /* RumbaRecommendationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RumbaRecommendationService.swift; sourceTree = "<group>"; };
+		29FE1134A685809ED87D78D2 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		51A6E6947C3293D7DFA53CAC /* ExerciseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRepository.swift; sourceTree = "<group>"; };
+		5B2C27D1E33CE7E2F42C7D30 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		6D27B7E73B8E6F7330FCEDA3 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		727B05012F2451D86E993961 /* PostgresService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostgresService.swift; sourceTree = "<group>"; };
+		9302F8F748A066D2D4B7CD71 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		938839DBE0DEBD67DFA4AEF8 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
+		9E7147036B37ED1F9A92590F /* RecommendationMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationMath.swift; sourceTree = "<group>"; };
+		A6E3C53CCA98808CA2C38542 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		B1D03C87009E69241260FEE0 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		CB5A6CF53AADE62C12CAD5B5 /* DocxExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocxExporter.swift; sourceTree = "<group>"; };
+		D97117A1F0349751C26E5034 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E415736F7F9077628AFFA7EE /* RumbaMacApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RumbaMacApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6B2C8E82F68400923594A1F /* StatusBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBannerView.swift; sourceTree = "<group>"; };
+		EA79592A8CFD92886DC20716 /* RumbaMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RumbaMacApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C1A8DAB21005CD241593247E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7783F9F6B428EE8826346C82 /* PostgresNIO in Frameworks */,
+				48EF1AAF0F03033DDF809B48 /* ZIPFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		340636832CF9FEDB38DB3C76 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				51A6E6947C3293D7DFA53CAC /* ExerciseRepository.swift */,
+				727B05012F2451D86E993961 /* PostgresService.swift */,
+				938839DBE0DEBD67DFA4AEF8 /* ProfileRepository.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3969A6B47CC5843C79176B15 = {
+			isa = PBXGroup;
+			children = (
+				FD71EA27431EF577801D7761 /* RumbaMacApp */,
+				E145E6D2C1F827EC61809847 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5CBFAA8ECA9DD44272C29FB0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B2C27D1E33CE7E2F42C7D30 /* DashboardView.swift */,
+				D97117A1F0349751C26E5034 /* LoginView.swift */,
+				A6E3C53CCA98808CA2C38542 /* RootView.swift */,
+				E6B2C8E82F68400923594A1F /* StatusBannerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A389B2CF360BA2DDF9FFA2CB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CB5A6CF53AADE62C12CAD5B5 /* DocxExporter.swift */,
+				2221C55C36677C347F41C084 /* RumbaRecommendationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A3A4C68748F69E63B3E8BD09 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9E7147036B37ED1F9A92590F /* RecommendationMath.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		E145E6D2C1F827EC61809847 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E415736F7F9077628AFFA7EE /* RumbaMacApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7BB157D2BC8DE49625D06C8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B1D03C87009E69241260FEE0 /* AppViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FD71EA27431EF577801D7761 /* RumbaMacApp */ = {
+			isa = PBXGroup;
+			children = (
+				29FE1134A685809ED87D78D2 /* AppTheme.swift */,
+				9302F8F748A066D2D4B7CD71 /* Configuration.swift */,
+				6D27B7E73B8E6F7330FCEDA3 /* Models.swift */,
+				EA79592A8CFD92886DC20716 /* RumbaMacApp.swift */,
+				340636832CF9FEDB38DB3C76 /* Data */,
+				A389B2CF360BA2DDF9FFA2CB /* Services */,
+				A3A4C68748F69E63B3E8BD09 /* Utilities */,
+				E7BB157D2BC8DE49625D06C8 /* ViewModels */,
+				5CBFAA8ECA9DD44272C29FB0 /* Views */,
+			);
+			name = RumbaMacApp;
+			path = Sources/RumbaMacApp;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C33FC482A4CAD9AA74BE0CD1 /* RumbaMacApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80B8B9467455C8F37968C93A /* Build configuration list for PBXNativeTarget "RumbaMacApp" */;
+			buildPhases = (
+				97E6E6F750D8FEC8D30EA516 /* Sources */,
+				C1A8DAB21005CD241593247E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RumbaMacApp;
+			packageProductDependencies = (
+				6225C6C46E37CC9A351721A3 /* PostgresNIO */,
+				D747245706CAB15ACA62C437 /* ZIPFoundation */,
+			);
+			productName = RumbaMacApp;
+			productReference = E415736F7F9077628AFFA7EE /* RumbaMacApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29224B797181C8AE70484BDE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					C33FC482A4CAD9AA74BE0CD1 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 85B5EC718D361C0744329B3E /* Build configuration list for PBXProject "RumbaMacApp" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 3969A6B47CC5843C79176B15;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				15376A6874BCAB837F6771B5 /* XCRemoteSwiftPackageReference "postgres-nio" */,
+				EC1911471FCCB11011C8C1A7 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E145E6D2C1F827EC61809847 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C33FC482A4CAD9AA74BE0CD1 /* RumbaMacApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		97E6E6F750D8FEC8D30EA516 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				683A42BE415061C62E92E9D5 /* AppTheme.swift in Sources */,
+				EA552D544B164B1E1B0172A0 /* AppViewModel.swift in Sources */,
+				A3B88864013D91C91487B361 /* Configuration.swift in Sources */,
+				9235B3754FBCF528514E6612 /* DashboardView.swift in Sources */,
+				B848116D7C2F2EAB91DFB386 /* DocxExporter.swift in Sources */,
+				C558D42EB6D510B4E2934ECA /* ExerciseRepository.swift in Sources */,
+				BB7BC17324967FA7CB5CFF26 /* LoginView.swift in Sources */,
+				CC44BF512C9CC9DEF1E67732 /* Models.swift in Sources */,
+				6484156912E1C1D4B548DED6 /* PostgresService.swift in Sources */,
+				F3650F4BE0E54BB7B9E2D20E /* ProfileRepository.swift in Sources */,
+				BE500DB22DFFA10E22C8D373 /* RecommendationMath.swift in Sources */,
+				778142F4B87D7F7EBA2A44E3 /* RootView.swift in Sources */,
+				786C2ACAF70470E5F535619A /* RumbaMacApp.swift in Sources */,
+				E51E71FA4FAC57DAC3896020 /* RumbaRecommendationService.swift in Sources */,
+				965418108AFF0DCA323158AA /* StatusBannerView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0BEAB12835F12F3701A4BF2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		95BEDCCD3F3EAE1F58C02607 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Rumba";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rumba.exercice.app;
+				PRODUCT_NAME = RumbaMacApp;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		96352CE70182022A9E070759 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		FEEBF2975C12F38EEB157B81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 Rumba";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rumba.exercice.app;
+				PRODUCT_NAME = RumbaMacApp;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		80B8B9467455C8F37968C93A /* Build configuration list for PBXNativeTarget "RumbaMacApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEEBF2975C12F38EEB157B81 /* Debug */,
+				95BEDCCD3F3EAE1F58C02607 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		85B5EC718D361C0744329B3E /* Build configuration list for PBXProject "RumbaMacApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BEAB12835F12F3701A4BF2F /* Debug */,
+				96352CE70182022A9E070759 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		15376A6874BCAB837F6771B5 /* XCRemoteSwiftPackageReference "postgres-nio" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/postgres-nio.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.32.1;
+			};
+		};
+		EC1911471FCCB11011C8C1A7 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.20;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6225C6C46E37CC9A351721A3 /* PostgresNIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15376A6874BCAB837F6771B5 /* XCRemoteSwiftPackageReference "postgres-nio" */;
+			productName = PostgresNIO;
+		};
+		D747245706CAB15ACA62C437 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC1911471FCCB11011C8C1A7 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 29224B797181C8AE70484BDE /* Project object */;
+}

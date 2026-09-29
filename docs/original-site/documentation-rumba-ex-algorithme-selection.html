@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PLI ❘ Algorithme RUMBA.EX</title>
+  <meta name="description" content="Modèle de sélection d&#039;articles et d&#039;exercices avec RAG, pgvector, formules mathématiques et recommandation pédagogique explicable.">
+  <link rel="canonical" href="https://pragmalearninginstitute.com/outils/documentation/rumba-ex-algorithme-selection">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/pli-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/pli-favicon-48.png" sizes="48x48" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/pli-apple-touch-icon.png">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="application-name" content="Pragma Learning Institute">
+  <meta name="apple-mobile-web-app-title" content="PLI">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pragma Learning Institute">
+  <meta property="og:title" content="PLI ❘ Algorithme RUMBA.EX">
+  <meta property="og:description" content="Modèle de sélection d&#039;articles et d&#039;exercices avec RAG, pgvector, formules mathématiques et recommandation pédagogique explicable.">
+  <meta property="og:url" content="https://pragmalearninginstitute.com/outils/documentation/rumba-ex-algorithme-selection">
+  <meta property="og:image" content="https://pragmalearninginstitute.com/assets/pli-social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@700&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/outils-documentation.css?v=20260506-docux">
+  <meta name="robots" content="index, follow">
+  <meta name="twitter:title" content="PLI ❘ Algorithme RUMBA.EX">
+  <meta name="twitter:description" content="Modèle de sélection d&#039;articles et d&#039;exercices avec RAG, pgvector, formules mathématiques et recommandation pédagogique explicable.">
+  <meta name="twitter:image" content="https://pragmalearninginstitute.com/assets/pli-social-card.png">
+</head>
+<body>
+  <header class="site-header pli-global-header">
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="brand" href="index.html" aria-label="Accueil Pragma Learning Institute"><span>PLI</span></a>
+      <div class="links" id="pli-global-nav-links"><a href="recherche.html">Publications</a><a href="incubation-programme.html">Formation</a><a href="outils.html">Outils</a><a href="linstitut.html">L'institut</a><a href="equipe.html">Équipe</a></div>
+      <pli-auth-button></pli-auth-button>
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="pli-global-nav-links"><span class="menu-lines" aria-hidden="true"></span></button>
+    </nav>
+  </header>
+
+  <main class="course-layout">
+    <aside class="doc-toc" aria-label="Sommaire">
+      <h2>Sommaire</h2>
+      <a href="#cadre-general-de-la-recommandation-dans-rumba">01 Cadre général de la recommandation dans Rumba</a>
+      <a href="#variables-du-modele-et-logique-de-selection">02 Variables du modèle et logique de sélection</a>
+      <a href="#etape-1-agregation-ponderee-des-erreurs">03 Étape 1, agrégation pondérée des erreurs</a>
+      <a href="#etape-2-transformation-en-degres-de-confiance">04 Étape 2, transformation en degrés de confiance</a>
+      <a href="#etape-3-score-de-pertinence-pour-chaque-article-">05 Étape 3, score de pertinence pour chaque article ou exercice</a>
+      <a href="#diversite-autorite-et-re-ranking-editorial">06 Diversité, autorité et re-ranking éditorial</a>
+      <a href="#diagnostic-en-deux-temps-et-efficacite-pedagogiq">07 Diagnostic en deux temps et efficacité pédagogique</a>
+      <a href="#implementation-minimale-du-noyau-de-selection">08 Implémentation minimale du noyau de sélection</a>
+      <a href="#selection-core-py">09 selection_core.py</a>
+      <a href="#exemple-minimal-pour-tester-la-chaine-complete">10 Exemple minimal pour tester la chaîne complète</a>
+      <a href="#demo-selection-py">11 demo_selection.py</a>
+      <a href="#articulation-avec-pgvector-et-un-pipeline-rag">12 Articulation avec pgvector et un pipeline RAG</a>
+    </aside>
+
+    <article class="doc-article">
+      <header class="doc-article-hero">
+        <p class="eyebrow">Ressource technique · RUMBA.EX</p>
+        <h1>Sélection d'articles et d'exercices avec RAG, modèle pondéré et formules mathématiques</h1>
+        <p>Modèle pondéré de sélection d'articles et d'exercices de Rumba avec RAG, pgvector, formules mathématiques, profils latents et recommandation pédagogique explicable.</p>
+      </header>
+
+      <section class="doc-panel imported-context" id="cadre-general-de-la-recommandation-dans-rumba">
+<h2>Cadre général de la recommandation dans Rumba</h2>
+      <p>
+        Cette note présente le modèle de sélection utilisé par Rumba pour recommander des articles et des exercices dans un cadre pédagogique compatible avec un pipeline RAG. L’objectif n’est pas seulement de produire un classement. Il s’agit de construire une recommandation explicable, pondérée, auditabile et suffisamment robuste pour articuler profils latents, contenus pédagogiques et récupération de contexte. Le système repose sur un diagnostic en deux temps, une estimation probabiliste des profils, puis une agrégation avec une matrice de similarité contenu profil.
+      </p>
+      <p>
+        Cette architecture cherche à concilier précision de la recommandation, lisibilité des règles de calcul et intégration à un environnement plus large mobilisant des embeddings et pgvector. Le point important est que la recommandation ne dépend pas d’une simple heuristique opaque. Elle repose sur des formules interprétables et des étapes distinctes que l’on peut contrôler.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="variables-du-modele-et-logique-de-selection">
+<h2>Variables du modèle et logique de sélection</h2>
+      <p>
+        On note l’ensemble des profils latents, l’ensemble des contenus pédagogiques et le sous-ensemble des items posés lors du diagnostic. Chaque item observé produit un score d’erreur, et chaque item diagnostique porte une distribution de poids sur les profils. La matrice de similarité relie ensuite chaque profil à chaque article ou exercice. Le cœur du problème consiste à estimer un vecteur de confiance sur les profils, puis à transformer cette estimation en un score de pertinence pour chaque contenu.
+      </p>
+      <p>
+        Ce cadre est utile parce qu’il sépare clairement trois niveaux. D’abord l’observation des réponses. Ensuite l’inférence sur les profils. Enfin la sélection des contenus. Cette séparation améliore la lisibilité scientifique du système et facilite les ajustements méthodologiques.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="etape-1-agregation-ponderee-des-erreurs">
+<h2>Étape 1, agrégation pondérée des erreurs</h2>
+      <p>
+        Le premier calcul consiste à agréger les erreurs observées en les pondérant selon leur lien avec les profils. Chaque profil reçoit ainsi un score brut qui reflète l’intensité des signaux accumulés pendant le diagnostic.
+      </p>
+
+      <div class="doc-equation">
+        <div class="math">
+          S<sub>p</sub> = <span class="sum">∑<span class="sub">j ∈ 𝒬</span></span> W<sub>j,p</sub> · r<sub>j</sub>
+        </div>
+      </div>
+
+      <p>
+        Cette étape est décisive, car elle transforme un ensemble de réponses localisées en une estimation plus globale du positionnement de l’utilisateur. La pondération évite de traiter toutes les erreurs comme équivalentes. Certaines réponses ont davantage de valeur diagnostique que d’autres.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="etape-2-transformation-en-degres-de-confiance">
+<h2>Étape 2, transformation en degrés de confiance</h2>
+      <p>
+        Les scores bruts sont ensuite transformés en degrés de confiance à l’aide d’une softmax inversée. Ce choix permet de convertir une logique d’erreur en distribution probabiliste sur les profils, tout en maintenant une température réglable.
+      </p>
+
+      <div class="doc-equation">
+        <div class="math">
+          c<sub>p</sub> =
+          <span class="frac">
+            <span class="top">exp( − S<sub>p</sub> / τ )</span>
+            <span class="bottom">
+              <span class="sum">∑<span class="sub">q ∈ 𝒫</span></span> exp( − S<sub>q</sub> / τ )
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <p>
+        Le paramètre de température régule la dispersion des croyances. Une température faible produit une distribution plus concentrée. Une température plus élevée laisse davantage de place à l’incertitude. Cette propriété est utile pour calibrer le comportement du système selon le niveau de prudence recherché.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="etape-3-score-de-pertinence-pour-chaque-article-">
+<h2>Étape 3, score de pertinence pour chaque article ou exercice</h2>
+      <p>
+        Une fois la confiance profilée obtenue, la recommandation agrège cette distribution avec la matrice de similarité entre profils et contenus. Chaque article ou exercice reçoit alors un score final de pertinence.
+      </p>
+
+      <div class="doc-equation">
+        <div class="math">
+          R<sub>e</sub> = <span class="sum">∑<span class="sub">p ∈ 𝒫</span></span> c<sub>p</sub> · M<sub>p,e</sub>
+        </div>
+      </div>
+
+      <p>
+        Ce mécanisme fait le lien entre diagnostic et sélection. Il permet de faire émerger des contenus cohérents avec les besoins estimés de l’utilisateur. Dans une version complète du système, la matrice peut être issue d’embeddings vectoriels calculés en amont et récupérés via pgvector.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="diversite-autorite-et-re-ranking-editorial">
+<h2>Diversité, autorité et re-ranking éditorial</h2>
+      <p>
+        Le tri par pertinence seule ne suffit pas. Une recommandation utile doit aussi éviter la redondance, ouvrir plusieurs domaines d’apprentissage et tenir compte de signaux d’autorité. Pour cette raison, Rumba ajoute un score final intégrant diversité et qualité éditoriale.
+      </p>
+
+      <div class="doc-equation">
+        <div class="math">
+          F<sub>e</sub> = α · R<sub>e</sub> − β · D<sub>e</sub> + γ · A<sub>e</sub>
+        </div>
+      </div>
+
+      <p>
+        La pénalisation de redondance évite de proposer plusieurs contenus trop proches. Le terme d’autorité permet d’intégrer des critères comme la fraîcheur, la qualité ou la couverture pédagogique. Le système conserve ainsi une logique fine de personnalisation sans tomber dans la répétition automatique.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="diagnostic-en-deux-temps-et-efficacite-pedagogiq">
+<h2>Diagnostic en deux temps et efficacité pédagogique</h2>
+      <p>
+        Le diagnostic utilisé par Rumba ne cherche pas à poser un grand nombre de questions indistinctes. Il procède par étapes. Une première phase fait émerger des profils candidats. Une seconde phase affine ensuite l’estimation sur les profils les plus plausibles. Cette stratégie réduit la variance des estimations tout en limitant le nombre d’items à afficher.
+      </p>
+      <p>
+        Ce choix est important dans un cadre pédagogique et conversationnel. Il améliore la fluidité de l’expérience utilisateur et rend l’intégration dans un pipeline RAG plus crédible. Le système gagne en réactivité sans renoncer à la qualité de l’inférence.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="implementation-minimale-du-noyau-de-selection">
+<h2>Implémentation minimale du noyau de sélection</h2>
+      <p>
+        Le premier bloc ci-dessous illustre le cœur du système. On y retrouve la softmax inversée, l’agrégation pondérée des erreurs et le calcul de pertinence sur les contenus.
+      </p>
+</section>
+
+      <section class="doc-panel" id="selection-core-py">
+<h2>selection_core.py</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>selection_core.py</span><span>extrait technique</span></div>
+<pre>from __future__ import annotations
+import math
+from typing import Dict
+
+Profile = str
+ItemId  = str
+
+def softmax_inverse(scores: Dict[Profile, float], tau: float = 0.35) -> Dict[Profile, float]:
+    """Renvoie c_p = softmax(-S_p/tau)."""
+    vals = {p: -s / max(tau, 1e-9) for p, s in scores.items()}
+    m = max(vals.values()) if vals else 0.0
+    exps = {p: math.exp(v - m) for p, v in vals.items()}
+    Z = sum(exps.values()) or 1.0
+    return {p: exps[p] / Z for p in scores}
+
+def aggregate_profile_scores(weight_matrix: Dict[ItemId, Dict[Profile, float]],
+                             observed_errors: Dict[ItemId, float]) -> Dict[Profile, float]:
+    """S_p = sum_j W_{j,p} r_j (W normalisé en L1 par item)."""
+    S: Dict[Profile, float] = {}
+    for j, rj in observed_errors.items():
+        row = weight_matrix.get(j, {})
+        Z = sum(row.values()) or 1.0
+        for p, w in row.items():
+            S[p] = S.get(p, 0.0) + (w / Z) * float(rj)
+    return S
+
+def relevance(M: Dict[Profile, Dict[ItemId, float]], conf: Dict[Profile, float]) -> Dict[ItemId, float]:
+    """R_e = sum_p c_p M_{p,e}."""
+    R: Dict[ItemId, float] = {}
+    for p, row in M.items():
+        cp = conf.get(p, 0.0)
+        if cp == 0.0:
+            continue
+        for e, sim in row.items():
+            R[e] = R.get(e, 0.0) + cp * float(sim)
+    return R</pre>
+</div>
+</section>
+
+      <section class="doc-panel imported-context" id="exemple-minimal-pour-tester-la-chaine-complete">
+<h2>Exemple minimal pour tester la chaîne complète</h2>
+      <p>
+        Le second bloc fournit un jeu de données simple. Il permet de vérifier le fonctionnement complet de la chaîne, depuis les erreurs observées jusqu’au calcul de la pertinence finale.
+      </p>
+</section>
+
+      <section class="doc-panel" id="demo-selection-py">
+<h2>demo_selection.py</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>demo_selection.py</span><span>extrait technique</span></div>
+<pre>M = {
+  "profil_A": {"e1": 0.9, "e2": 0.2, "e3": 0.1},
+  "profil_B": {"e1": 0.1, "e2": 0.8, "e3": 0.6}
+}
+meta = {
+  "e1": {"domain": "Lecture", "title": "Article 1"},
+  "e2": {"domain": "Grammaire", "title": "Article 2"},
+  "e3": {"domain": "Lecture", "title": "Article 3"}
+}
+W = {
+  "q1": {"profil_A": 0.8, "profil_B": 0.2},
+  "q2": {"profil_A": 0.3, "profil_B": 0.7}
+}
+r = {"q1": 0.2, "q2": 0.7}
+
+S = aggregate_profile_scores(W, r)
+c = softmax_inverse(S, tau=0.4)
+R = relevance(M, c)
+
+print("S:", S)
+print("c:", c)
+print("R:", R)</pre>
+</div>
+</section>
+
+      <section class="doc-panel imported-context" id="articulation-avec-pgvector-et-un-pipeline-rag">
+<h2>Articulation avec pgvector et un pipeline RAG</h2>
+      <p>
+        Dans un système complet, la matrice de similarité peut être dérivée d’embeddings stockés dans pgvector. Les similarités sont alors calculées à partir de distances vectorielles ou de mesures cosinus, puis matérialisées dans une logique de recherche KNN. Le pipeline ne remplace pas cette recherche vectorielle. Il la contraint et l’oriente grâce à la distribution de profils obtenue pendant le diagnostic.
+      </p>
+      <p>
+        Cette articulation présente un intérêt majeur pour les systèmes RAG. Le modèle de langage reçoit un contexte non seulement proche sur le plan sémantique, mais aussi pondéré par une logique pédagogique explicable. La récupération devient ainsi plus utile, plus ciblée et mieux alignée avec les besoins estimés de l’utilisateur.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="conclusion">
+<h2>Conclusion</h2>
+      <p>
+        Le modèle de sélection de Rumba combine un diagnostic pondéré, une transformation probabiliste des profils, une agrégation de pertinence et un re-ranking intégrant diversité et autorité. Cette chaîne rend la recommandation plus stable, plus explicable et plus compatible avec un environnement RAG fondé sur des embeddings et pgvector.
+      </p>
+      <p>
+        L’intérêt du modèle tient précisément à cette articulation entre formules mathématiques, logique pédagogique et infrastructure vectorielle. Il ne s’agit pas simplement de classer des contenus. Il s’agit de construire une recommandation mesurable, interprétable et capable d’alimenter un LLM avec des contextes pertinents, variés et auditables.
+      </p>
+</section>
+
+      <div class="doc-bottom-actions">
+        <rumba-template-button label="Toutes les ressources" href="/outils/documentation" theme="blanc" height="46" font-size="16" show-arrow="true"></rumba-template-button>
+        <rumba-template-button label="Ouvrir RUMBA.EX" href="/rumba-ex" theme="dark" height="46" font-size="16" show-arrow="true"></rumba-template-button>
+      </div>
+    </article>
+  </main>
+
+  <pli-global-footer></pli-global-footer>
+  <script src="/public/custom-elements/rumba-template-button.js"></script>
+  <script src="/public/custom-elements/pli-global-footer.js?v=20260821-footer-restored"></script>
+  <script src="/public/custom-elements/pli-auth-button.js"></script>
+  <script src="/public/custom-elements/pli-global-header.js?v=20260821-search-relevance-fuzzy"></script>
+  <script src="/public/access-link-tracker.js?v=20260512-access-links"></script>
+</body>
+</html>

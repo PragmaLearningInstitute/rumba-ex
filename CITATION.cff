@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, cite this repository and the commit used."
+title: "RUMBA.EX: adaptive exercise selection"
+type: software
+authors:
+  - family-names: "Trinché"
+    given-names: "Timothée"
+    affiliation: "Pragma Learning Institute"
+repository-code: "https://github.com/PragmaLearningInstitute/rumba-ex"
+url: "https://pragmalearninginstitute.com/"
+license: MIT

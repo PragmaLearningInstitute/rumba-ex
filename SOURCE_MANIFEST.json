@@ -1,0 +1,450 @@
+{
+  "edition": "2026-09-28",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 349,
+      "sha256": "926ee931db59cc86dfacbe124390ddc10d3bf97111952d023123659c9a3da2b2"
+    },
+    {
+      "path": "CITATION.cff",
+      "bytes": 400,
+      "sha256": "8f82c9fb8c88ef145b215567dd85c1ae0c4f396af9402300703216974d0684e4"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "bytes": 1151,
+      "sha256": "79f27fbc5c7095c1ff447dff9327aca60ca5c3cfef916f2b1e46a364e1061239"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1103,
+      "sha256": "e3ac647cf4d5d4f019b7a8c1ae7a5c5ebd5e44ffd2507806a9e1f52950ce48aa"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4122,
+      "sha256": "b01897a1e3893929152fda4340e501689250e3914568a1529955117ddcb33a5b"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 1706,
+      "sha256": "1d56f66f345d981b2dedab9d281b56f54922ed5e96e2820d15968b3c604b031d"
+    },
+    {
+      "path": "VALIDATION.md",
+      "bytes": 1809,
+      "sha256": "c357b7b9054720cd16621800a7b71010cae2540633a22543ed60db394b846011"
+    },
+    {
+      "path": "desktop/macos/Package.resolved",
+      "bytes": 3981,
+      "sha256": "d1fed01cb66277620419e57022fd7d61f99d16aa14f339a6c1a659cc479c7494"
+    },
+    {
+      "path": "desktop/macos/Package.swift",
+      "bytes": 836,
+      "sha256": "2c1e0ae5dd99501dc3e65fdda4a56ed7cb890af6694857860eac484977e50fc6"
+    },
+    {
+      "path": "desktop/macos/README.md",
+      "bytes": 1086,
+      "sha256": "611c2ed96dfc96b907f3f71a6012bd263a9adb29e9998d64f21431b8a5a85a92"
+    },
+    {
+      "path": "desktop/macos/RumbaMacApp.xcodeproj/project.pbxproj",
+      "bytes": 19610,
+      "sha256": "0e0836d68b1ea365e92618988be42d2fa83fc7a9e6466d3838f14a5582449dc5"
+    },
+    {
+      "path": "desktop/macos/RumbaMacApp.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+      "bytes": 135,
+      "sha256": "7f3b00b5c3fdb45242d7b87e1e5c4e25d1fa8129a16c94295ecc4e8ea2235c5f"
+    },
+    {
+      "path": "desktop/macos/RumbaMacApp.xcodeproj/xcshareddata/xcschemes/RumbaMacApp.xcscheme",
+      "bytes": 3512,
+      "sha256": "5578c844a95b95b70c70441511bc30b1a018f5076a84cc4b473b06b5c97aeae7"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/AppTheme.swift",
+      "bytes": 853,
+      "sha256": "57d2d22cf04b45c74090f308023fbf35ff062f8a648d056115237cb8c26a958c"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Configuration.swift",
+      "bytes": 1474,
+      "sha256": "b30e9061ecf1ec0443562f5ea68920edb583ebee20d9274bf185bcc2a48208e9"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Data/ExerciseRepository.swift",
+      "bytes": 8583,
+      "sha256": "021922887ce53142f16edf798b75ccb86329ddee2b7f23573db282424f495c96"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Data/LocalBackendStore.swift",
+      "bytes": 16090,
+      "sha256": "d19bd1d67679f67d4d77ab2d579e1a2f2d401f7c3ec3219c158b51c562fbc42b"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Data/PostgresService.swift",
+      "bytes": 674,
+      "sha256": "f83fb9c1702dcf9063d786f917928213c5c11e974ea459bf1d8d87f836788a89"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Data/ProfileRepository.swift",
+      "bytes": 9816,
+      "sha256": "81866c6887a8f0df817f431ec4b2e45b69e46323ed4a9b27bdc55e7c59b77d42"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Models.swift",
+      "bytes": 3212,
+      "sha256": "442b3285d502d452353ca5c54fff377743a905d97f6729df4cc7762acfae0195"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/AccentColor.colorset/Contents.json",
+      "bytes": 329,
+      "sha256": "c44e978f7ee87e32a37876cd418ede6e88a0edb5c2adb2c63dd635444b16d524"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/AppIcon.appiconset/Contents.json",
+      "bytes": 971,
+      "sha256": "2db7164e11d3856a16189e488f2635e3de655ab835b4c13209a9b72cdc679034"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/AppIcon.appiconset/icon-1024.png",
+      "bytes": 289006,
+      "sha256": "8c902e403a3717a6e89d5c0416c65f04443aec1b6d78a232678f0208ca826c14"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/AppIcon.appiconset/icon-128.png",
+      "bytes": 5991,
+      "sha256": "d48444a30c5c34fbac662e3b12c36bba1372058a1fccb68ed9e280fd6847ffdd"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/AppIcon.appiconset/icon-16.png",
+      "bytes": 1656,
+      "sha256": "ecafe30d4dd88d92866e0ededbf7e8833ee4c36d74f7fce607d8ff86340f50b2"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/AppIcon.appiconset/icon-256.png",
+      "bytes": 12286,
+      "sha256": "d9efa6c7cda6908f80f621c46ff9ea0e18d274f30e8c71e70845c8b51ab3c5a9"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/AppIcon.appiconset/icon-32.png",
+      "bytes": 2250,
+      "sha256": "88b42859e74111be776dfe53226fa4445245a1a8b739fd381732ba2b98fb46d4"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/AppIcon.appiconset/icon-512.png",
+      "bytes": 43843,
+      "sha256": "0a00a6f42561c6b419326f1024a04b5218f8ad0ab822360a1e2b7b80a8df0993"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/AppIcon.appiconset/icon-64.png",
+      "bytes": 3448,
+      "sha256": "86a899048ffa3ab0b20270e7972fdb3280f345d0e2e1779b08f2f7fc974ae010"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/Contents.json",
+      "bytes": 63,
+      "sha256": "0fd49ba3c3585c709678e0046a821c3c60685ec7063720d30d3a3448be3a208b"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/Logo.imageset/Contents.json",
+      "bytes": 227,
+      "sha256": "a1fbe7f1bd808e7f665e8a446674694535776ad0110b8534b59e2f389b947d4f"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Assets.xcassets/Logo.imageset/logo.png",
+      "bytes": 528125,
+      "sha256": "cd7add4d76bea3457ee3eed8c4962bd5408833c98f40063cd16be25d1c8cfd08"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Resources/Branding/rumba-logo-1024.png",
+      "bytes": 528125,
+      "sha256": "cd7add4d76bea3457ee3eed8c4962bd5408833c98f40063cd16be25d1c8cfd08"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/RumbaMacApp.swift",
+      "bytes": 374,
+      "sha256": "f7bad1d94a760138ff073cb5a75c3a24146865308bbe87891dfbd901baa249e8"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Services/DocxExporter.swift",
+      "bytes": 7816,
+      "sha256": "e6ce4b4285e712c0944f52639a01cbbddaf93d433721d56f1cc18b48da94851b"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Services/RumbaRecommendationService.swift",
+      "bytes": 9766,
+      "sha256": "ce85ec08f26ef94912a7adeedb362cb7f6382786bc8befd0d7a8ec8b71393261"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Utilities/RecommendationMath.swift",
+      "bytes": 1151,
+      "sha256": "b5829f9c5f0b588a7b94c7f22b654ce1cf3307024f59f5f3e309d64f5d02ce04"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/ViewModels/AppViewModel.swift",
+      "bytes": 18725,
+      "sha256": "7ba83b373bc989562a7bbbce8835671168ff3db794e8ad0649544d6df149eb8c"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Views/DashboardView.swift",
+      "bytes": 14241,
+      "sha256": "45f6d6425851cc05d0dba2ef771515ddad6c1c9f39750afb60991dea4b4dd1b5"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Views/LoginView.swift",
+      "bytes": 4645,
+      "sha256": "3bbb603617ac0dd406bcd88f40124f5ec6c9a001ea1420d0613e7622b7811c0e"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Views/RootView.swift",
+      "bytes": 1609,
+      "sha256": "b4f127a3f2ea40d65c82393e809fab96464d5ed62d008d5afa1f57e55d8d09a8"
+    },
+    {
+      "path": "desktop/macos/Sources/RumbaMacApp/Views/StatusBannerView.swift",
+      "bytes": 1194,
+      "sha256": "5fec195491a7060b8dca7a00fbd5227a5e8e9ec35859fcacedf6c882b981dcf7"
+    },
+    {
+      "path": "desktop/macos/project.yml",
+      "bytes": 1406,
+      "sha256": "c8b101802f8e785fb3f3d3b6a0589d8284fcabb8c90b830fd7652e789eb3ac80"
+    },
+    {
+      "path": "desktop/macos/scripts/bootstrap_db.sh",
+      "bytes": 437,
+      "sha256": "c8c245a5b352118c8b5bf2c242af66ae25dea6ec154996a5eb3ca05df9b7cca6"
+    },
+    {
+      "path": "desktop/macos/scripts/generate_logo.swift",
+      "bytes": 2424,
+      "sha256": "b2f01c3dbb173fcc2f1480b27ac3df495f6896f13492fb568600b1dc16271c2a"
+    },
+    {
+      "path": "desktop/macos/scripts/install_app_to_applications.sh",
+      "bytes": 3232,
+      "sha256": "a019b24285390db736c9794cb72850ff8be19228f2a3b247b9ab686608cad804"
+    },
+    {
+      "path": "desktop/macos/sql/01_app_backend.sql",
+      "bytes": 4030,
+      "sha256": "2be26f6d8177c9da1295314511ba417b5454d9df2c2aecf85f40ea37b1df8f2f"
+    },
+    {
+      "path": "desktop/macos/sql/02_rumba_query_examples.sql",
+      "bytes": 2511,
+      "sha256": "e92bcafada65cc8cf8eb8c9c7918e7947b6f12c47698a8452d1ca22fb6de3d8c"
+    },
+    {
+      "path": "docs/algorithms.fr.md",
+      "bytes": 5728,
+      "sha256": "0b1384995234342e6d5cae0b1c4539e9643e7da211ec63d7e8554e954464051c"
+    },
+    {
+      "path": "docs/deployment.fr.md",
+      "bytes": 6702,
+      "sha256": "e907b77517ee31acf5c337646978e5ead1e19c860da40425b50946c9c759b0e7"
+    },
+    {
+      "path": "docs/embeddings.fr.md",
+      "bytes": 5123,
+      "sha256": "f407a475ee8c76fb5a5223752654bf1f41e500a90d52d3221bd665237143d09f"
+    },
+    {
+      "path": "docs/getting-started.fr.md",
+      "bytes": 5702,
+      "sha256": "06c7b4512ceb05eb5d00fc3008ab76b4310c9b5722b284f0c105706bafaf4d60"
+    },
+    {
+      "path": "docs/original-site/documentation-rumba-ex-algorithme-selection.html",
+      "bytes": 18131,
+      "sha256": "9a4cb404c6a6a7873e2aefa0177c7a9c40dff3e960a9ae0aab3657e7a36a460f"
+    },
+    {
+      "path": "docs/original-site/documentation-rumba-ex-embeddings-exercices.html",
+      "bytes": 18734,
+      "sha256": "87a2cd27433aea9f62c7f7d47378b0295384b29b60faf349a3b8fb122c7e9fe8"
+    },
+    {
+      "path": "docs/original-site/documentation-rumba-ex-pca-recommandation.html",
+      "bytes": 19039,
+      "sha256": "510eb97586d6d6de1509a829783d644ac405b4c64f4648dada1c52b7d8e0298e"
+    },
+    {
+      "path": "docs/provenance.fr.md",
+      "bytes": 3164,
+      "sha256": "6c33cca757ca3060e00114a1a4156d7c0be02ad13adb84e2746baff43e113020"
+    },
+    {
+      "path": "schema/000_development.sql",
+      "bytes": 1837,
+      "sha256": "f0e4575481bb9e7d3504e24f9afa834cea1d5b1bc66b055766837377901198dc"
+    },
+    {
+      "path": "schema/001_embeddings.sql",
+      "bytes": 567,
+      "sha256": "78317be6ccd0747ee5bcaef7622c597424a6d547631069ceabd8be1fd40aab36"
+    },
+    {
+      "path": "schema/051_rumba_ex_public_site_sessions.sql",
+      "bytes": 4752,
+      "sha256": "81d3680e1223ef7a5e047fd4fd7dfbaec7698f3191c88307bb2ff9ec1c3f03a7"
+    },
+    {
+      "path": "server/README-injection-exercices.md",
+      "bytes": 2658,
+      "sha256": "dbb788e7c32519d7288ff5ddf720c98b7d621e68172495d6efa9b036bab6cbc4"
+    },
+    {
+      "path": "server/package-lock.json",
+      "bytes": 5722,
+      "sha256": "eb7b10804f7913fa9929591141e8de1de81a33daaef903251a02be6168f0155d"
+    },
+    {
+      "path": "server/package.json",
+      "bytes": 262,
+      "sha256": "1c67e7c2d300a480ee2015ad2f7b3f10ae5140993c2a032cc196bf609f3eef95"
+    },
+    {
+      "path": "server/requirements-ml.txt",
+      "bytes": 160,
+      "sha256": "b133b32aefede360810543189ae05192af8d48966ebf7568aa00f4e51624af48"
+    },
+    {
+      "path": "server/rumba-ex-api/db/pool.js",
+      "bytes": 681,
+      "sha256": "eb7d2d4e1c4e5f2a3e7006d4bbfb32d1cd2980777d5c30a46651e0a9c468786b"
+    },
+    {
+      "path": "server/rumba-ex-api/db/recommend.js",
+      "bytes": 22946,
+      "sha256": "542a50db3c1f22d24c4830769a56506581be36098c639640775c0cadc5c8fdb9"
+    },
+    {
+      "path": "server/rumba-ex-api/ecosystem.config.js",
+      "bytes": 239,
+      "sha256": "ba239dd2bfef059312b7968b9047c77e45fee4de68f9cab98e95ed721e9d118a"
+    },
+    {
+      "path": "server/rumba-ex-api/index.js",
+      "bytes": 2719,
+      "sha256": "0b92656ea652c437fac7e1d02d2f244acd948450e3d9a8b2078fdd0ed256fc72"
+    },
+    {
+      "path": "server/rumba-ex-api/middleware/auth.js",
+      "bytes": 3707,
+      "sha256": "b7d7c3a835e0ad3709103ae8a3e5b14887078434d7d6af9a6974536215adab97"
+    },
+    {
+      "path": "server/rumba-ex-api/middleware/rateLimit.js",
+      "bytes": 1246,
+      "sha256": "211a6da9dc91c4e925dc6a77583e3ddb78ca79e72e69c02ae839e695cfc22d6f"
+    },
+    {
+      "path": "server/rumba-ex-api/package-lock.json",
+      "bytes": 35398,
+      "sha256": "46aacc8245e248f892da6f978810038fad51cc9419dcd95ab9a7ee94c360509f"
+    },
+    {
+      "path": "server/rumba-ex-api/package.json",
+      "bytes": 715,
+      "sha256": "a6be80242b08080be6d0330e88c158b51ef5506f4229c416b65194a1c125538e"
+    },
+    {
+      "path": "server/rumba-ex-api/routes/auth.js",
+      "bytes": 3678,
+      "sha256": "45caa1158e8bbdbb5d6c1d3f7f5aa7658a09a7c636d0d0a9446b9cd6b5d0be36"
+    },
+    {
+      "path": "server/rumba-ex-api/routes/profiles.js",
+      "bytes": 4114,
+      "sha256": "41a8ab74cbcd5bda560ebbbbcaaa712b1f010d29d55c8e331d5288db21866f27"
+    },
+    {
+      "path": "server/rumba-ex-api/routes/recommend.js",
+      "bytes": 8307,
+      "sha256": "a1e8bcd7f0b5eacb8e6ccc206c0570ccaceb96e00bbe3355ff76387279accd63"
+    },
+    {
+      "path": "server/rumba-ex-api/tests/rate-limit.test.js",
+      "bytes": 1075,
+      "sha256": "36381e3a6ae705a163e74d0d3ba18712e7a59e2cab142f6fc0a02bbe9b69d01f"
+    },
+    {
+      "path": "server/rumba-ex-directus-schema.json",
+      "bytes": 27775,
+      "sha256": "ff824a3f135eaebb3579e344027bf189485327e402d3f3f6b6f0c690fe08f810"
+    },
+    {
+      "path": "server/rumba-ex-directus-setup.sh",
+      "bytes": 9955,
+      "sha256": "1a33f03a6e84d6f6393ea0316bf4455a67da522a63a5baa7df263bc9e09c7f58"
+    },
+    {
+      "path": "server/rumba-ex-ml-cron.sh",
+      "bytes": 120,
+      "sha256": "512b40fcbaeca90d32764fa378f0149b8870201d8026bdac728b1b2a41f4b118"
+    },
+    {
+      "path": "server/rumba-ex-ml-worker.js",
+      "bytes": 6061,
+      "sha256": "a8be0052358bb44741f16b7c28bd08b089587e0a00af71410b78027811647836"
+    },
+    {
+      "path": "server/rumba-ex-worker.ecosystem.config.cjs",
+      "bytes": 303,
+      "sha256": "009da6fec21bf576b4208e906bf2b9db7dad7ad33d5307a0160a082a413752dc"
+    },
+    {
+      "path": "server/rumbaEngine.js",
+      "bytes": 18465,
+      "sha256": "769880ead826cab038bebb453448faf2e67c5a80b975d5bfa8f85c9006454eec"
+    },
+    {
+      "path": "server/rumba_ml_pipeline.py",
+      "bytes": 15038,
+      "sha256": "6ac3ca26775c91e40fbd85b474e53ddd786ab6254a49ae4c120f1e6d54aa0da7"
+    },
+    {
+      "path": "server/rumba_ml_utils.py",
+      "bytes": 6123,
+      "sha256": "4ed58035a16f0ca6cf2c7236336cc03a8138747ea8951e44a72fa7ca0b5b4c4b"
+    },
+    {
+      "path": "server/trigger_ml_notify.sql",
+      "bytes": 439,
+      "sha256": "21d87c8b7ffbe0d9fdeab32c94d56903ad35e64cefc50749f0be019966c6fc89"
+    },
+    {
+      "path": "web/rumba-ex-app.html",
+      "bytes": 118688,
+      "sha256": "31a9ac90a5f91a61550b90432f1d396dec8d8a2cc0c85cb09fe090f2234a4cfb"
+    },
+    {
+      "path": "web/rumba-ex-tracker.js",
+      "bytes": 3204,
+      "sha256": "88b866ff2b902b8198239d922320e15b253de5d52eb96b430ea1036c50a6a765"
+    },
+    {
+      "path": "web/rumba-ex.html",
+      "bytes": 20177,
+      "sha256": "8a11acd935ce99e2d9fbe8763802b1bea15d58af5826d8cf13dc3623dba1c300"
+    },
+    {
+      "path": "web/rumbaEngine.js",
+      "bytes": 18465,
+      "sha256": "769880ead826cab038bebb453448faf2e67c5a80b975d5bfa8f85c9006454eec"
+    },
+    {
+      "path": "web/rumbaExporter.js",
+      "bytes": 11651,
+      "sha256": "7668c326d45b86dd92617a87840a9a441c89d4a85e0d07721af5ae09fa6255ac"
+    }
+  ]
+}

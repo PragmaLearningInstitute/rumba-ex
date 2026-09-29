@@ -1,0 +1,31 @@
+# Credentials and local configuration
+.env
+.env.*
+*.pem
+*.key
+*.p12
+# Dependencies and generated products
+node_modules/
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.build/
+.swiftpm/
+build/
+dist/
+*.app/
+*.exe
+*.dmg
+*.zip
+.DS_Store
+# Private research and application data
+data/
+sessions/
+exports/
+backups/
+*.log
+*.wav
+*.mp4
+*.mov
+local_backend.json

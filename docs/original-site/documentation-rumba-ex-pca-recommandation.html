@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PLI ❘ PCA et recommandation pédagogique</title>
+  <meta name="description" content="Comprendre comment PCA, embeddings et IA améliorent la recommandation pédagogique, stabilisent les similarités et personnalisent l&#039;apprentissage.">
+  <link rel="canonical" href="https://pragmalearninginstitute.com/outils/documentation/rumba-ex-pca-recommandation">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/pli-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/pli-favicon-48.png" sizes="48x48" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/pli-apple-touch-icon.png">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="application-name" content="Pragma Learning Institute">
+  <meta name="apple-mobile-web-app-title" content="PLI">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pragma Learning Institute">
+  <meta property="og:title" content="PLI ❘ PCA et recommandation pédagogique">
+  <meta property="og:description" content="Comprendre comment PCA, embeddings et IA améliorent la recommandation pédagogique, stabilisent les similarités et personnalisent l&#039;apprentissage.">
+  <meta property="og:url" content="https://pragmalearninginstitute.com/outils/documentation/rumba-ex-pca-recommandation">
+  <meta property="og:image" content="https://pragmalearninginstitute.com/assets/pli-social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@700&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/outils-documentation.css?v=20260506-docux">
+  <meta name="robots" content="index, follow">
+  <meta name="twitter:title" content="PLI ❘ PCA et recommandation pédagogique">
+  <meta name="twitter:description" content="Comprendre comment PCA, embeddings et IA améliorent la recommandation pédagogique, stabilisent les similarités et personnalisent l&#039;apprentissage.">
+  <meta name="twitter:image" content="https://pragmalearninginstitute.com/assets/pli-social-card.png">
+</head>
+<body>
+  <header class="site-header pli-global-header">
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="brand" href="index.html" aria-label="Accueil Pragma Learning Institute"><span>PLI</span></a>
+      <div class="links" id="pli-global-nav-links"><a href="recherche.html">Publications</a><a href="incubation-programme.html">Formation</a><a href="outils.html">Outils</a><a href="linstitut.html">L'institut</a><a href="equipe.html">Équipe</a></div>
+      <pli-auth-button></pli-auth-button>
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="pli-global-nav-links"><span class="menu-lines" aria-hidden="true"></span></button>
+    </nav>
+  </header>
+
+  <main class="course-layout">
+    <aside class="doc-toc" aria-label="Sommaire">
+      <h2>Sommaire</h2>
+      <a href="#resume-executif">01 Résumé exécutif</a>
+      <a href="#pourquoi-utiliser-le-pca-dans-un-systeme-de-reco">02 Pourquoi utiliser le PCA dans un système de recommandation pédagogique</a>
+      <a href="#comment-les-embeddings-soutiennent-la-personnali">03 Comment les embeddings soutiennent la personnalisation des apprentissages</a>
+      <a href="#du-diagnostic-au-classement-des-exercices">04 Du diagnostic au classement des exercices</a>
+      <a href="#code-et-logique-du-pipeline-de-recommandation">05 Code et logique du pipeline de recommandation</a>
+      <a href="#dataset-io-py">06 dataset_io.py</a>
+      <a href="#evaluer-les-reponses-avec-exactitude-et-similari">07 Évaluer les réponses avec exactitude et similarité</a>
+      <a href="#scoring-py">08 scoring.py</a>
+      <a href="#agreger-les-scores-pour-classer-les-exercices">09 Agréger les scores pour classer les exercices</a>
+      <a href="#recommender-core-py">10 recommender_core.py</a>
+      <a href="#garantir-la-diversite-des-recommandations">11 Garantir la diversité des recommandations</a>
+      <a href="#diversity-filter-py">12 diversity_filter.py</a>
+    </aside>
+
+    <article class="doc-article">
+      <header class="doc-article-hero">
+        <p class="eyebrow">Ressource technique · RUMBA.EX</p>
+        <h1>PCA, embeddings et recommandation pédagogique avec IA</h1>
+        <p>Comprendre comment le PCA améliore la recommandation pédagogique avec IA en réduisant la dimension des embeddings, en stabilisant les similarités et en renforçant la personnalisation.</p>
+      </header>
+
+      <section class="doc-panel imported-context" id="resume-executif">
+<h2>Résumé exécutif</h2>
+<p>
+          Dans notre système de personnalisation pédagogique, les exercices et les profils d’apprenants sont représentés sous forme d’embeddings. Ces vecteurs denses permettent de rapprocher des contenus, d’identifier des similarités fines et de soutenir un moteur de recommandation plus précis. Leur richesse constitue un avantage méthodologique important, mais elle crée aussi une difficulté. Plus l’espace est dimensionnellement vaste, plus il devient coûteux à manipuler et difficile à interpréter.
+        </p>
+        <p>
+          L’Analyse en Composantes Principales, ou PCA, intervient pour rendre cet espace plus lisible. Elle réduit la dimension des embeddings tout en conservant ce qui structure réellement les différences entre exercices, profils et trajectoires d’apprentissage. Dans notre architecture, le PCA ne relève donc pas d’un simple choix technique. Il joue un rôle central dans la stabilisation du calcul, dans la visualisation des proximités et dans la qualité de la recommandation pédagogique.
+        </p>
+</section>
+
+      <section class="doc-panel imported-context" id="pourquoi-utiliser-le-pca-dans-un-systeme-de-reco">
+<h2>Pourquoi utiliser le PCA dans un système de recommandation pédagogique</h2>
+        <p>
+          Le PCA permet de condenser l’information utile dans un espace plus compact. Les embeddings initiaux peuvent contenir plusieurs centaines de dimensions. Une telle profondeur rend les calculs plus lourds et masque souvent les regroupements réellement significatifs. En réduisant la dimension, le PCA facilite l’identification de structures cohérentes. Des familles d’exercices proches se regroupent plus nettement, tandis que certains contenus atypiques deviennent plus visibles.
+        </p>
+        <p>
+          Cette réduction améliore aussi l’interprétabilité. Lorsqu’un profil d’apprenant est projeté dans le même espace que les exercices, il devient plus facile de comprendre quelles activités lui ressemblent le plus sur le plan cognitif ou pédagogique. Le PCA aide ainsi à transformer un ensemble d’embeddings abstraits en une cartographie plus exploitable pour la recommandation.
+        </p>
+</section>
+
+      <section class="doc-panel imported-context" id="comment-les-embeddings-soutiennent-la-personnali">
+<h2>Comment les embeddings soutiennent la personnalisation des apprentissages</h2>
+        <p>
+          Les embeddings traduisent des contenus pédagogiques et des caractéristiques d’apprentissage dans un langage vectoriel. Ils servent à comparer des exercices entre eux, à rapprocher certains profils d’élèves de certaines tâches et à organiser le moteur de recommandation autour de similarités calculables. Sans réduction, ces comparaisons restent possibles, mais elles deviennent plus opaques et plus coûteuses. Avec le PCA, elles gagnent en stabilité et en clarté.
+        </p>
+
+        <h3>Un espace plus lisible pour les exercices</h3>
+        <p>
+          La projection réduite permet de mieux distinguer des groupes d’exercices qui mobilisent des compétences proches. Cette lisibilité est utile non seulement pour recommander, mais aussi pour contrôler la cohérence du corpus pédagogique.
+        </p>
+
+        <h3>Un espace partagé pour les profils d’apprenants</h3>
+        <p>
+          Lorsqu’un profil est placé dans le même espace réduit, il devient possible d’estimer plus finement la proximité entre les besoins d’un élève et les exercices disponibles. C’est cette mise en relation qui nourrit ensuite le classement des recommandations.
+        </p>
+</section>
+
+      <section class="doc-panel imported-context" id="du-diagnostic-au-classement-des-exercices">
+<h2>Du diagnostic au classement des exercices</h2>
+        <p>
+          La recommandation s’inscrit dans un processus complet. Lorsqu’un apprenant répond à une série d’exercices, ses réponses sont analysées. Le système ne se contente pas d’une logique binaire. Il prend en compte à la fois l’exactitude stricte et la proximité textuelle avec la réponse attendue. Une réponse presque correcte n’est donc pas traitée comme une erreur totale.
+        </p>
+        <p>
+          Ces scores alimentent ensuite un diagnostic de profil. Les résultats sont agrégés, pondérés puis normalisés afin d’estimer la probabilité que l’élève corresponde à un ou plusieurs profils cognitifs. À partir de là, le moteur compare les embeddings réduits des exercices à l’embedding associé au profil estimé. Chaque exercice reçoit alors un score de pertinence qui permet d’ordonner les recommandations.
+        </p>
+        <p>
+          Une étape supplémentaire garantit la diversité des propositions. Le système ne cherche pas à enfermer l’apprenant dans un seul type d’exercice. Il veille à couvrir plusieurs domaines de compétence afin que la personnalisation reste précise sans devenir étroite.
+        </p>
+</section>
+
+      <section class="doc-panel imported-context" id="code-et-logique-du-pipeline-de-recommandation">
+<h2>Code et logique du pipeline de recommandation</h2>
+        <p>
+          Les scripts ci-dessous illustrent le fonctionnement du pipeline. Ils montrent comment les données sont chargées, comment les réponses sont évaluées, comment les scores de profil sont agrégés et comment la recommandation finale est produite avec une contrainte de diversité.
+        </p>
+</section>
+
+      <section class="doc-panel" id="dataset-io-py">
+<h2>dataset_io.py</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>dataset_io.py</span><span>extrait technique</span></div>
+<pre>$ python dataset_io.py
+→ Chargement des similarités profil↔exercice et des métadonnées d'exercices
+import re, ast, json, pathlib
+
+def _extract_rows(stmt: str):
+    rows, cur, depth, on = [], "", 0, False
+    for c in stmt:
+        if c == "(" and not on:
+            on = True; depth = 1; cur = "("
+        elif on:
+            cur += c
+            if c == "(": depth += 1
+            elif c == ")":
+                depth -= 1
+                if depth == 0:
+                    rows.append(cur); on = False
+    return rows
+
+def parse_dataset(path: str):
+    """
+    Retourne
+      M : dict[profil][exo_id] = similarité (float)
+      meta : dict[exo_id] = {"title": str, "domain": str, "answer": str}
+    """
+    p = pathlib.Path(path)
+    text = p.read_text(encoding="utf-8")
+
+    try:
+        if text.strip().startswith("["):
+            blob = json.loads(text)
+            return _from_json(blob)
+        if "\n{" in text and "\"id\"" in text:
+            blob = [json.loads(line) for line in text.splitlines() if line.strip().startswith("{")]
+            return _from_json(blob)
+    except Exception:
+        pass
+
+    M, meta = {}, {}
+    m = re.search(r"INSERT INTO profile_exercise_similarity.*?;", text, re.S)
+    if m:
+        for row in _extract_rows(m.group(0)):
+            prof, exo, sim = ast.literal_eval(row)
+            M.setdefault(prof, {})[exo] = float(sim)
+
+    for m in re.finditer(r"INSERT INTO exercise.*?;", text, re.S):
+        for row in _extract_rows(m.group(0)):
+            parts = ast.literal_eval(row)
+            exo_id, title, domain, answer = parts[0], parts[1], parts[3], parts[7]
+            meta[exo_id] = {"title": title, "domain": domain, "answer": answer}
+    return M, meta
+
+def _from_json(blob):
+    M, meta = {}, {}
+    for item in blob:
+        if item.get("type") == "similarity":
+            prof = item["profile"]; exo = item["exercise"]; sim = float(item["sim"])
+            M.setdefault(prof, {})[exo] = sim
+        elif item.get("type") == "exercise":
+            exo = item["id"]
+            meta[exo] = {
+              "title": item.get("title",""),
+              "domain": item.get("domain",""),
+              "answer": item.get("answer","")
+            }
+    return M, meta
+[OK] Données prêtes pour le diagnostic et la recommandation
+        </pre>
+</div>
+</section>
+
+      <section class="doc-panel imported-context" id="evaluer-les-reponses-avec-exactitude-et-similari">
+<h2>Évaluer les réponses avec exactitude et similarité</h2>
+        <p>
+          L’évaluation combine une logique stricte et une logique graduée. Cela permet de mieux distinguer les erreurs franches des réponses proches mais imparfaites.
+        </p>
+</section>
+
+      <section class="doc-panel" id="scoring-py">
+<h2>scoring.py</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>scoring.py</span><span>extrait technique</span></div>
+<pre>$ python scoring.py
+→ Évaluation nuancée des réponses avec exactitude et similarité textuelle
+from difflib import SequenceMatcher
+
+def evaluate_response(correct: str, answer: str) -> float:
+    """
+    Score ∈ [0,1]. 0 = "réponse parfaite", 1 = "erreur nette".
+    """
+    exact = 1 if answer.strip() != correct.strip() else 0
+    ratio = SequenceMatcher(None, answer, correct).ratio()
+    return 0.7 * exact + 0.3 * (1 - ratio)
+
+def batch_error(exercise_ids, answers, meta):
+    errors = {}
+    for exo_id, answer in zip(exercise_ids, answers):
+        expected = meta[exo_id]["answer"]
+        errors[exo_id] = evaluate_response(expected, answer)
+    return errors
+[OK] Scores par exercice disponibles
+        </pre>
+</div>
+</section>
+
+      <section class="doc-panel imported-context" id="agreger-les-scores-pour-classer-les-exercices">
+<h2>Agréger les scores pour classer les exercices</h2>
+        <p>
+          Une fois les profils normalisés, les similarités sont agrégées afin de produire un classement initial des exercices les plus pertinents.
+        </p>
+</section>
+
+      <section class="doc-panel" id="recommender-core-py">
+<h2>recommender_core.py</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>recommender_core.py</span><span>extrait technique</span></div>
+<pre>$ python recommender_core.py
+→ Normalisation des profils puis agrégation des similarités profil↔exercice
+def normalize(scores: dict):
+    total = sum(scores.values()) or 1.0
+    return {k: v/total for k, v in scores.items()}
+
+S_norm = normalize(scores)
+
+RJ = {}
+for profil, row in M.items():
+    w = S_norm.get(profil, 0.0)
+    for exo, sim in row.items():
+        RJ[exo] = RJ.get(exo, 0.0) + w * sim
+
+sorted_exos = sorted(RJ.items(), key=lambda x: x[1], reverse=True)
+[OK] Classement initial obtenu
+        </pre>
+</div>
+</section>
+
+      <section class="doc-panel imported-context" id="garantir-la-diversite-des-recommandations">
+<h2>Garantir la diversité des recommandations</h2>
+        <p>
+          La sélection finale veille à ne pas concentrer toutes les recommandations sur un seul domaine. Cette étape est essentielle pour éviter une personnalisation trop fermée.
+        </p>
+</section>
+
+      <section class="doc-panel" id="diversity-filter-py">
+<h2>diversity_filter.py</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>diversity_filter.py</span><span>extrait technique</span></div>
+<pre>$ python diversity_filter.py
+→ Sélection finale avec contrainte de diversité
+N_RECOMMEND = 6
+recs, domains = [], set()
+for exo, score in sorted_exos:
+    dom = meta[exo]["domain"]
+    if len(recs) < N_RECOMMEND and (dom not in domains or len(domains) >= 2):
+        recs.append(exo); domains.add(dom)
+    if len(recs) >= N_RECOMMEND:
+        break
+[OK] Top exercices équilibrés sur plusieurs domaines
+        </pre>
+</div>
+</section>
+
+      <section class="doc-panel imported-context" id="ou-le-pca-agit-concretement-dans-le-pipeline">
+<h2>Où le PCA agit concrètement dans le pipeline</h2>
+        <p>
+          Le PCA intervient au moment où les embeddings sont préparés et projetés dans un espace plus compact. Ce sont ensuite ces vecteurs réduits qui servent de base pour les calculs de similarité, pour le classement des exercices et pour le stockage. En pratique, cela signifie que la recommandation repose sur des représentations plus légères, plus stables et plus interprétables.
+        </p>
+        <p>
+          Cette étape peut aussi être rejouée dans un cadre de recherche ou de développement afin de comparer plusieurs niveaux de réduction, d’étudier la variance expliquée ou de vérifier la stabilité des voisins les plus proches dans l’espace réduit. Le PCA devient alors un levier de contrôle méthodologique autant qu’un outil de performance.
+        </p>
+</section>
+
+      <section class="doc-panel imported-context" id="conclusion">
+<h2>Conclusion</h2>
+        <p>
+          Le PCA joue un rôle fondamental dans notre système de recommandation pédagogique avec IA. Il améliore la lisibilité des embeddings, renforce la stabilité des similarités et facilite la personnalisation des apprentissages. Couplé à une évaluation nuancée des réponses et à un filtre de diversité, il permet de transformer des données complexes en propositions pédagogiques réellement exploitables. L’enjeu n’est donc pas seulement computationnel. Il touche directement à la qualité de l’accompagnement proposé aux apprenants.
+        </p>
+</section>
+
+      <div class="doc-bottom-actions">
+        <rumba-template-button label="Toutes les ressources" href="/outils/documentation" theme="blanc" height="46" font-size="16" show-arrow="true"></rumba-template-button>
+        <rumba-template-button label="Ouvrir RUMBA.EX" href="/rumba-ex" theme="dark" height="46" font-size="16" show-arrow="true"></rumba-template-button>
+      </div>
+    </article>
+  </main>
+
+  <pli-global-footer></pli-global-footer>
+  <script src="/public/custom-elements/rumba-template-button.js"></script>
+  <script src="/public/custom-elements/pli-global-footer.js?v=20260821-footer-restored"></script>
+  <script src="/public/custom-elements/pli-auth-button.js"></script>
+  <script src="/public/custom-elements/pli-global-header.js?v=20260821-search-relevance-fuzzy"></script>
+  <script src="/public/access-link-tracker.js?v=20260512-access-links"></script>
+</body>
+</html>

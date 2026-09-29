@@ -1,0 +1,21 @@
+{
+  "name": "rumba-ex-api",
+  "version": "1.0.0",
+  "description": "Backend Express bridge for RUMBA.EX Directus auth and PostgreSQL recommendations.",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "check": "node --check index.js && node --check routes/auth.js && node --check routes/profiles.js && node --check routes/recommend.js && node --check middleware/auth.js && node --check middleware/rateLimit.js && node --check db/pool.js && node --check db/recommend.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  },
+  "license": "MIT"
+}

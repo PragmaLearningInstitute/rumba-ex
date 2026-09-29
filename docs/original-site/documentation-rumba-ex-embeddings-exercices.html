@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PLI ❘ Embeddings et exercices RUMBA.EX</title>
+  <meta name="description" content="Architecture RUMBA.EX avec PostgreSQL, pgvector, RAG et LLM pour relier exercices, articles, profils apprenants et contexte pédagogique.">
+  <link rel="canonical" href="https://pragmalearninginstitute.com/outils/documentation/rumba-ex-embeddings-exercices">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/pli-favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/pli-favicon-48.png" sizes="48x48" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/pli-apple-touch-icon.png">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="application-name" content="Pragma Learning Institute">
+  <meta name="apple-mobile-web-app-title" content="PLI">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Pragma Learning Institute">
+  <meta property="og:title" content="PLI ❘ Embeddings et exercices RUMBA.EX">
+  <meta property="og:description" content="Architecture RUMBA.EX avec PostgreSQL, pgvector, RAG et LLM pour relier exercices, articles, profils apprenants et contexte pédagogique.">
+  <meta property="og:url" content="https://pragmalearninginstitute.com/outils/documentation/rumba-ex-embeddings-exercices">
+  <meta property="og:image" content="https://pragmalearninginstitute.com/assets/pli-social-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Space+Grotesk:wght@700&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/public/outils-documentation.css?v=20260506-docux">
+  <meta name="robots" content="index, follow">
+  <meta name="twitter:title" content="PLI ❘ Embeddings et exercices RUMBA.EX">
+  <meta name="twitter:description" content="Architecture RUMBA.EX avec PostgreSQL, pgvector, RAG et LLM pour relier exercices, articles, profils apprenants et contexte pédagogique.">
+  <meta name="twitter:image" content="https://pragmalearninginstitute.com/assets/pli-social-card.png">
+</head>
+<body>
+  <header class="site-header pli-global-header">
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="brand" href="index.html" aria-label="Accueil Pragma Learning Institute"><span>PLI</span></a>
+      <div class="links" id="pli-global-nav-links"><a href="recherche.html">Publications</a><a href="incubation-programme.html">Formation</a><a href="outils.html">Outils</a><a href="linstitut.html">L'institut</a><a href="equipe.html">Équipe</a></div>
+      <pli-auth-button></pli-auth-button>
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="pli-global-nav-links"><span class="menu-lines" aria-hidden="true"></span></button>
+    </nav>
+  </header>
+
+  <main class="course-layout">
+    <aside class="doc-toc" aria-label="Sommaire">
+      <h2>Sommaire</h2>
+      <a href="#une-architecture-academique-entre-base-relationn">01 Une architecture académique entre base relationnelle, vecteurs et modèles de langage</a>
+      <a href="#pourquoi-combiner-postgresql-pgvector-et-rag">02 Pourquoi combiner PostgreSQL, pgvector et RAG</a>
+      <a href="#structuration-relationnelle-et-robustesse-tempor">03 Structuration relationnelle et robustesse temporelle</a>
+      <a href="#pgvector-et-la-vectorisation-pedagogique">04 Pgvector et la vectorisation pédagogique</a>
+      <a href="#indexation-de-voisinage-et-performance-de-recupe">05 Indexation de voisinage et performance de récupération</a>
+      <a href="#rumba-comme-memoire-externe-explicable-pour-un-l">06 Rumba comme mémoire externe explicable pour un LLM</a>
+      <a href="#implementations-minimales-et-reproductibles">07 Implémentations minimales et reproductibles</a>
+      <a href="#base-schema-sql">08 base_schema.sql</a>
+      <a href="#uuid-v7-sql">09 uuid_v7.sql</a>
+      <a href="#uuid-v7-py">10 uuid_v7.py</a>
+      <a href="#exercisechunk-sql">11 exercisechunk.sql</a>
+      <a href="#search-examples-sql">12 search_examples.sql</a>
+    </aside>
+
+    <article class="doc-article">
+      <header class="doc-article-hero">
+        <p class="eyebrow">Ressource technique · RUMBA.EX</p>
+        <h1>Rumba, pgvector et RAG avec LLM</h1>
+        <p>Architecture académique de Rumba avec PostgreSQL, pgvector, RAG et LLM pour la récupération de contexte, l'auditabilité et la performance pédagogique.</p>
+      </header>
+
+      <section class="doc-panel imported-context" id="une-architecture-academique-entre-base-relationn">
+<h2>Une architecture académique entre base relationnelle, vecteurs et modèles de langage</h2>
+      <p>
+        Rumba a été pensée comme une infrastructure de données au service d’usages pédagogiques avancés avec LLM. Son intérêt ne réside pas seulement dans la génération ou l’organisation d’exercices. L’architecture met en relation une base PostgreSQL structurée, une extension vectorielle native avec pgvector et un pipeline de retrieval augmented generation. L’objectif est d’offrir au modèle de langage une mémoire externe contrôlée, explicable et suffisamment rapide pour soutenir une interaction humaine en contexte éducatif.
+      </p>
+      <p>
+        Dans cette logique, la base ne sert pas uniquement à stocker des contenus. Elle devient une couche d’orchestration entre la structure relationnelle, les embeddings sémantiques et les mécanismes de récupération de contexte. Cette combinaison permet d’améliorer la pertinence des réponses tout en conservant une traçabilité forte.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="pourquoi-combiner-postgresql-pgvector-et-rag">
+<h2>Pourquoi combiner PostgreSQL, pgvector et RAG</h2>
+      <p>
+        Une base relationnelle classique apporte cohérence, auditabilité et contrôle des dépendances. Pgvector ajoute à PostgreSQL la capacité de stocker et d’interroger des représentations vectorielles. Le schéma RAG permet ensuite à un LLM de récupérer des fragments de contenu pertinents au lieu de s’appuyer uniquement sur ses poids internes. Ensemble, ces briques créent un système où la récupération d’information, la personnalisation pédagogique et l’explicabilité restent compatibles.
+      </p>
+      <p>
+        Cette articulation est particulièrement importante dans un cadre académique. Elle rend possible une ingénierie des données mesurable, une révision plus rigoureuse des contenus et un meilleur contrôle du contexte injecté dans les réponses générées.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="structuration-relationnelle-et-robustesse-tempor">
+<h2>Structuration relationnelle et robustesse temporelle</h2>
+      <p>
+        Le schéma relationnel de Rumba formalise les exercices, leurs métadonnées pédagogiques, les segments textuels et leurs dépendances. Cette structuration limite les redondances, clarifie les contraintes métier et facilite le suivi des révisions. Les identifiants UUID v7 jouent ici un rôle utile. Comme ils sont ordonnés temporellement, ils améliorent la stabilité des index, la localité d’insertion et la lecture chronologique des événements.
+      </p>
+      <p>
+        Des déclencheurs assurent également la mise à jour cohérente des horodatages. Cette discipline est essentielle pour garantir la reproductibilité des analyses et la compréhension a posteriori de l’évolution de la base.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="pgvector-et-la-vectorisation-pedagogique">
+<h2>Pgvector et la vectorisation pédagogique</h2>
+      <p>
+        Avec pgvector, chaque exercice ou segment de texte peut être associé à un embedding dense. Ces vecteurs traduisent le contenu dans un espace sémantique où la proximité représente une similarité conceptuelle. Dans le cadre d’un pipeline RAG avec LLM, cette propriété est décisive. Elle permet de récupérer non pas seulement des occurrences lexicales proches, mais des fragments pédagogiquement pertinents.
+      </p>
+      <p>
+        La base devient alors une mémoire externe interrogeable en SQL. Les opérateurs de distance, qu’ils reposent sur le cosinus, l’euclidien ou le produit interne, rendent possible un classement directement dans la requête. Ce point est méthodologiquement important, car il maintient la logique de récupération dans un espace déclaratif, auditable et plus transparent qu’une couche externe opaque.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="indexation-de-voisinage-et-performance-de-recupe">
+<h2>Indexation de voisinage et performance de récupération</h2>
+      <p>
+        Pour desservir de grands volumes de vecteurs à faible latence, l’architecture s’appuie sur des index de voisinage approximatif. Des approches comme IVFFlat ou HNSW permettent de réduire fortement le coût de recherche tout en conservant un bon niveau de rappel. Le compromis entre rapidité et précision peut être ajusté au moyen de paramètres explicites. Cela rend la performance mesurable et pilotable.
+      </p>
+      <p>
+        Dans un usage RAG, cette performance n’est pas un détail technique secondaire. Elle conditionne la capacité du LLM à recevoir rapidement un contexte utile sans dégrader l’expérience utilisateur. La rapidité de récupération devient alors une composante directe de la qualité pédagogique.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="rumba-comme-memoire-externe-explicable-pour-un-l">
+<h2>Rumba comme mémoire externe explicable pour un LLM</h2>
+      <p>
+        Dans cette architecture, Rumba joue le rôle d’une mémoire externe contrôlée. Lorsqu’un utilisateur pose une question ou interagit avec un assistant pédagogique, le LLM interroge la base, récupère les exercices ou les segments les plus proches, puis compose une réponse à partir de ces éléments. La table de chunks affine ce mécanisme en autorisant une récupération plus granulaire et plus ciblée.
+      </p>
+      <p>
+        Cette logique réduit le risque d’hallucination et améliore l’ancrage contextuel des réponses. La double matérialisation des embeddings, sous forme vectorielle pour la recherche et sous forme JSONB pour l’audit, renforce encore cette explicabilité. Rumba n’est donc pas un simple dépôt documentaire. C’est une infrastructure cognitive capable de soutenir un LLM avec des garanties de cohérence et de traçabilité.
+      </p>
+</section>
+
+      <section class="doc-panel imported-context" id="implementations-minimales-et-reproductibles">
+<h2>Implémentations minimales et reproductibles</h2>
+      <p>
+        Les exemples suivants montrent comment cette architecture peut être mise en œuvre. Ils couvrent le schéma relationnel, la génération d’identifiants temporels, la table de chunks, les requêtes de recherche vectorielle et l’upsert des embeddings.
+      </p>
+</section>
+
+      <section class="doc-panel" id="base-schema-sql">
+<h2>base_schema.sql</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>base_schema.sql</span><span>extrait technique</span></div>
+<pre>CREATE EXTENSION IF NOT EXISTS pgcrypto;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS vector;
+
+CREATE TYPE IF NOT EXISTS domain_enum           AS ENUM ('Phonémique','Orthographique','Syntaxe','Comprehension','Ecriture');
+CREATE TYPE IF NOT EXISTS level_enum            AS ENUM ('Niveau1','Niveau2','Niveau3','Niveau4','Niveau5','Niveau6');
+CREATE TYPE IF NOT EXISTS severity_enum         AS ENUM ('léger','modéré','sévère');
+CREATE TYPE IF NOT EXISTS explanation_mode_enum AS ENUM ('succinct','detail','profondeur');
+
+CREATE TABLE IF NOT EXISTS Exercise (
+  exercise_id    UUID PRIMARY KEY DEFAULT uuid_generate_v7(),
+  title          TEXT        NOT NULL,
+  content        TEXT        NOT NULL,
+  domain         domain_enum NOT NULL,
+  level          level_enum  NOT NULL,
+  age_min        INTEGER     NOT NULL CHECK (age_min &gt;= 0),
+  age_max        INTEGER     NOT NULL CHECK (age_max &gt;= age_min),
+  correct_answer TEXT        NOT NULL,
+  hint           TEXT,
+  embedding      vector(384),
+  created_at     TIMESTAMP   NOT NULL DEFAULT NOW(),
+  updated_at     TIMESTAMP   NOT NULL DEFAULT NOW()
+);
+
+CREATE OR REPLACE FUNCTION trg_set_updated_at() RETURNS TRIGGER AS $$
+BEGIN NEW.updated_at := NOW(); RETURN NEW; END; $$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_exercise_updated
+  BEFORE UPDATE ON Exercise
+  FOR EACH ROW EXECUTE FUNCTION trg_set_updated_at();</pre>
+</div>
+</section>
+
+      <section class="doc-panel" id="uuid-v7-sql">
+<h2>uuid_v7.sql</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>uuid_v7.sql</span><span>extrait technique</span></div>
+<pre>CREATE OR REPLACE FUNCTION uuid_generate_v7() RETURNS uuid AS $$
+WITH t AS (
+  SELECT floor(extract(epoch FROM clock_timestamp()) * 1000)::bigint AS ms,
+         gen_random_bytes(10) AS rnd
+)
+SELECT encode(
+  set_byte(set_byte(set_byte(set_byte(set_byte(set_byte(
+    repeat(E'\000', 6)::bytea, 0, (ms&gt;&gt;40) &amp; 255), 1, (ms&gt;&gt;32) &amp; 255),
+    2, (ms&gt;&gt;24) &amp; 255), 3, (ms&gt;&gt;16) &amp; 255),
+    4, (ms&gt;&gt;8) &amp; 255), 5, ms &amp; 255)
+  || set_byte(set_byte(substring(E'\000\000'::bytea,1,2), 0, 0x70 | 0x0), 1, 0x00)
+  || set_byte(set_byte(rnd, 0, (get_byte(rnd,0) &amp; 0x3F) | 0x80), 1, get_byte(rnd,1))
+, 'hex')::uuid;
+$$ LANGUAGE SQL IMMUTABLE;</pre>
+</div>
+</section>
+
+      <section class="doc-panel" id="uuid-v7-py">
+<h2>uuid_v7.py</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>uuid_v7.py</span><span>extrait technique</span></div>
+<pre>import os, time, uuid
+
+def uuid7() -&gt; uuid.UUID:
+    ms = int(time.time() * 1000)
+    rnd = bytearray(os.urandom(10))
+    b = bytearray(16)
+    b[0:6] = ms.to_bytes(6, "big")
+    b[6:8] = ((ms &amp; 0xFFFF) | 0x7000).to_bytes(2, "big")
+    b[8:16] = rnd
+    b[8] = (b[8] &amp; 0x3F) | 0x80
+    return uuid.UUID(bytes=bytes(b))
+
+if __name__ == "__main__":
+    print(uuid7())</pre>
+</div>
+</section>
+
+      <section class="doc-panel" id="exercisechunk-sql">
+<h2>exercisechunk.sql</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>exercisechunk.sql</span><span>extrait technique</span></div>
+<pre>CREATE TABLE IF NOT EXISTS ExerciseChunk (
+  chunk_id       UUID PRIMARY KEY DEFAULT uuid_generate_v7(),
+  exercise_id    UUID NOT NULL REFERENCES Exercise(exercise_id) ON DELETE CASCADE,
+  text           TEXT NOT NULL,
+  embedding_json JSONB NOT NULL DEFAULT '[]'::jsonb,
+  embedding      vector(384),
+  created_at     TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at     TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TRIGGER trg_chunk_updated
+  BEFORE UPDATE ON ExerciseChunk
+  FOR EACH ROW EXECUTE FUNCTION trg_set_updated_at();
+
+CREATE INDEX IF NOT EXISTS exercisechunk_embedding_ivfflat
+  ON ExerciseChunk USING ivfflat (embedding vector_l2_ops) WITH (lists = 100);</pre>
+</div>
+</section>
+
+      <section class="doc-panel" id="search-examples-sql">
+<h2>search_examples.sql</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>search_examples.sql</span><span>extrait technique</span></div>
+<pre>-- Requête KNN sur Exercise
+SELECT exercise_id, title, domain, level
+FROM Exercise
+ORDER BY embedding &lt;-&gt; $1::vector
+LIMIT 10;
+
+-- Requête KNN sur ExerciseChunk
+SELECT chunk_id, exercise_id, text
+FROM ExerciseChunk
+ORDER BY embedding &lt;-&gt; $1::vector
+LIMIT 10;</pre>
+</div>
+</section>
+
+      <section class="doc-panel" id="upsert-embeddings-py">
+<h2>upsert_embeddings.py</h2>
+<div class="doc-code">
+<div class="doc-code-header"><span>upsert_embeddings.py</span><span>extrait technique</span></div>
+<pre>import json, psycopg2
+from pgvector.psycopg2 import register_vector
+
+def upsert_chunk(conn, chunk_id, exercise_id, text, emb_list):
+    register_vector(conn)
+    cur = conn.cursor()
+    cur.execute(
+        """
+        INSERT INTO ExerciseChunk (chunk_id, exercise_id, text, embedding_json, embedding)
+        VALUES (%s, %s, %s, %s, %s)
+        ON CONFLICT (chunk_id) DO UPDATE
+        SET text = EXCLUDED.text,
+            embedding_json = EXCLUDED.embedding_json,
+            embedding = EXCLUDED.embedding
+        """,
+        (chunk_id, exercise_id, text, json.dumps({"embedding": emb_list}), emb_list)
+    )
+    conn.commit()</pre>
+</div>
+</section>
+
+      <section class="doc-panel imported-context" id="conclusion">
+<h2>Conclusion</h2>
+      <p>
+        L’architecture de Rumba montre qu’une base relationnelle enrichie par pgvector peut devenir une mémoire externe robuste pour des modèles de langage en contexte RAG. La combinaison d’un schéma structuré, d’identifiants temporellement ordonnés, d’une récupération vectorielle native et d’une logique de chunking permet d’alimenter un LLM avec des contextes plus pertinents, plus rapides à récupérer et plus justifiables a posteriori.
+      </p>
+      <p>
+        Cette approche réduit les hallucinations, améliore l’alignement pédagogique et renforce l’auditabilité des réponses. La performance n’est donc pas obtenue par une couche opaque ou improvisée. Elle repose sur des choix d’ingénierie des données explicites, mesurables et reproductibles, au service d’une interaction plus fiable entre corpus éducatif, base vectorielle et modèle de langage.
+      </p>
+</section>
+
+      <div class="doc-bottom-actions">
+        <rumba-template-button label="Toutes les ressources" href="/outils/documentation" theme="blanc" height="46" font-size="16" show-arrow="true"></rumba-template-button>
+        <rumba-template-button label="Ouvrir RUMBA.EX" href="/rumba-ex" theme="dark" height="46" font-size="16" show-arrow="true"></rumba-template-button>
+      </div>
+    </article>
+  </main>
+
+  <pli-global-footer></pli-global-footer>
+  <script src="/public/custom-elements/rumba-template-button.js"></script>
+  <script src="/public/custom-elements/pli-global-footer.js?v=20260821-footer-restored"></script>
+  <script src="/public/custom-elements/pli-auth-button.js"></script>
+  <script src="/public/custom-elements/pli-global-header.js?v=20260821-search-relevance-fuzzy"></script>
+  <script src="/public/access-link-tracker.js?v=20260512-access-links"></script>
+</body>
+</html>

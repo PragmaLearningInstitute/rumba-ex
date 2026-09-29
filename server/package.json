@@ -1,0 +1,16 @@
+{
+  "name": "rumba-ex-ml-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node rumba-ex-ml-worker.js"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}
